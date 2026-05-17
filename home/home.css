@@ -1,0 +1,138 @@
+.navbar{
+
+  position:fixed;
+
+  width:100%;
+
+  padding:20px 0;
+
+  background:
+  rgba(0,0,0,0.3);
+
+  backdrop-filter:blur(10px);
+
+}
+
+.nav-content{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+}
+
+.logo{
+
+  font-size:30px;
+
+  font-weight:bold;
+
+  background:
+  linear-gradient(
+    90deg,
+    #7c3aed,
+    #06b6d4
+  );
+
+  -webkit-background-clip:text;
+
+  -webkit-text-fill-color:transparent;
+
+}
+
+nav{
+
+  display:flex;
+
+  gap:30px;
+
+}
+
+.hero{
+
+  min-height:100vh;
+
+  display:flex;
+
+  align-items:center;
+
+  background:
+  linear-gradient(
+    135deg,
+    #070b14,
+    #111827,
+    #1e1b4b
+  );
+
+}
+
+.hero-content{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+}
+
+.hero-left h1{
+
+  font-size:70px;
+
+  margin-bottom:20px;
+
+}
+
+.hero-left p{
+
+  color:#94a3b8;
+
+  margin-bottom:30px;
+
+}
+
+.hero-left button{
+
+  padding:15px 30px;
+
+  border:none;
+
+  border-radius:15px;
+
+  background:
+  linear-gradient(
+    90deg,
+    #7c3aed,
+    #06b6d4
+  );
+
+  color:white;
+
+  font-size:16px;
+
+  cursor:pointer;
+
+}
+
+.phone-preview{
+
+  width:280px;
+
+  height:560px;
+
+  border-radius:40px;
+
+  background:
+  linear-gradient(
+    180deg,
+    #7c3aed,
+    #06b6d4
+  );
+
+  box-shadow:
+  0 0 40px rgba(124,58,237,0.5);
+
+}

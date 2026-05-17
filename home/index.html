@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadeau Case</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+    :root {
+      --pink: #f472b6;
+      --pink-light: #fce7f3;
+      --pink-mid: #ec4899;
+      --purple: #a78bfa;
+      --purple-light: #ede9fe;
+      --rose: #fb7185;
+      --coral: #f97316;
+      --text-dark: #1e1b4b;
+      --text-mid: #6b7280;
+      --text-soft: #9ca3af;
+      --bg: #fff8fc;
+      --white: #ffffff;
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+      --shadow-sm: 0 2px 12px rgba(236,72,153,0.08);
+      --shadow-md: 0 8px 32px rgba(236,72,153,0.12);
+      --shadow-lg: 0 20px 60px rgba(167,139,250,0.18);
+    }
+ 
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+ 
+    /* ── NAVBAR ── */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,248,252,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(244,114,182,0.12);
+      padding: 0 5%;
+    }
+ 
+    .nav-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+ 
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--text-dark);
+      letter-spacing: -0.3px;
+    }
+ 
+    .logo-dot {
+      width: 9px;
+      height: 9px;
+      background: linear-gradient(135deg, var(--pink-mid), var(--purple));
+      border-radius: 50%;
+    }
+ 
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+ 
+    .nav-links a {
+      text-decoration: none;
+      font-size: 14px;
+      color: var(--text-mid);
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+ 
+    .nav-links a:hover { color: var(--text-dark); }
+ 
+    .btn-login {
+      background: linear-gradient(135deg, var(--pink-mid), var(--rose));
+      color: #fff !important;
+      padding: 7px 20px;
+      border-radius: 20px;
+      font-size: 13px !important;
+      font-weight: 600 !important;
+    }
+ 
+    .btn-login:hover { opacity: 0.88; }
+ 
+    /* ── HERO ── */
+    .hero {
+      padding: 72px 5% 80px;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 48px;
+      min-height: calc(100vh - 60px);
+      position: relative;
+    }
+ 
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -80px;
+      width: 520px; height: 520px;
+      background: radial-gradient(circle, rgba(244,114,182,0.18) 0%, rgba(167,139,250,0.10) 55%, transparent 75%);
+      pointer-events: none;
+      border-radius: 50%;
+    }
+ 
+    .hero-left {
+      flex: 1;
+      max-width: 480px;
+      position: relative;
+      z-index: 1;
+    }
+ 
+    .badge-new {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: linear-gradient(135deg, #fce7f3, #ede9fe);
+      border: 1px solid rgba(244,114,182,0.25);
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--pink-mid);
+      margin-bottom: 28px;
+    }
+ 
+    .badge-dot {
+      width: 6px; height: 6px;
+      background: var(--pink-mid);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+ 
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+ 
+    .hero-left h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 5vw, 58px);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--text-dark);
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+ 
+    .hero-left h1 span {
+      background: linear-gradient(135deg, var(--pink-mid), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+ 
+    .hero-left p {
+      font-size: 16px;
+      color: var(--text-mid);
+      line-height: 1.7;
+      margin-bottom: 32px;
+      max-width: 380px;
+    }
+ 
+    .hero-cta {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+ 
+    .input-row {
+      display: flex;
+      gap: 10px;
+    }
+ 
+    .hero-input {
+      flex: 1;
+      height: 48px;
+      border: 1.5px solid rgba(244,114,182,0.25);
+      border-radius: 12px;
+      padding: 0 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      background: #fff;
+      color: var(--text-dark);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+ 
+    .hero-input:focus { border-color: var(--pink-mid); }
+    .hero-input::placeholder { color: var(--text-soft); }
+ 
+    .btn-primary {
+      height: 48px;
+      padding: 0 28px;
+      background: linear-gradient(135deg, var(--pink-mid), #c026d3);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+ 
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+ 
+    .social-proof {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+ 
+    .avatars {
+      display: flex;
+    }
+ 
+    .avatars span {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: #fff;
+      margin-left: -8px;
+    }
+ 
+    .avatars span:first-child { margin-left: 0; }
+ 
+    .av1 { background: linear-gradient(135deg,#f472b6,#ec4899); }
+    .av2 { background: linear-gradient(135deg,#a78bfa,#7c3aed); }
+    .av3 { background: linear-gradient(135deg,#fb7185,#f43f5e); }
+    .av4 { background: linear-gradient(135deg,#34d399,#10b981); }
+ 
+    .social-proof p {
+      font-size: 13px;
+      color: var(--text-mid);
+      line-height: 1.4;
+      margin: 0;
+      max-width: none;
+    }
+ 
+    .social-proof strong {
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+ 
+    /* ── HERO PHONE ── */
+    .hero-right {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+ 
+    .phone-mockup {
+      position: relative;
+      width: 220px;
+    }
+ 
+    .phone-frame {
+      width: 220px;
+      height: 440px;
+      background: #fff;
+      border-radius: 40px;
+      border: 2.5px solid rgba(0,0,0,0.08);
+      box-shadow: var(--shadow-lg), 0 0 0 8px rgba(255,255,255,0.6);
+      overflow: hidden;
+      position: relative;
+    }
+ 
+    .phone-notch {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 64px;
+      height: 22px;
+      background: #1e1b4b;
+      border-radius: 12px;
+      z-index: 2;
+    }
+ 
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(160deg, #fce7f3 0%, #ede9fe 50%, #dbeafe 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+ 
+    .phone-screen svg {
+      width: 140px;
+      height: 140px;
+    }
+ 
+    /* Floating chips */
+    .chip {
+      position: absolute;
+      background: #fff;
+      border-radius: 14px;
+      padding: 10px 14px;
+      box-shadow: var(--shadow-md);
+      font-size: 12px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      animation: float 3s ease-in-out infinite;
+    }
+ 
+    .chip-ship {
+      bottom: 80px;
+      left: -60px;
+      animation-delay: 0s;
+    }
+ 
+    .chip-upload {
+      top: 50px;
+      right: -50px;
+      animation-delay: 1.5s;
+    }
+ 
+    .chip-dots {
+      bottom: 30px;
+      right: -30px;
+      gap: 4px;
+      padding: 8px 12px;
+      animation-delay: 0.8s;
+    }
+ 
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+ 
+    .chip-emoji { font-size: 14px; }
+ 
+    .chip-dots span {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      display: block;
+    }
+ 
+    /* ── STATS ── */
+    .stats {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 5% 64px;
+    }
+ 
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+ 
+    .stat-card {
+      background: #fff;
+      border-radius: var(--radius-md);
+      padding: 24px 28px;
+      border: 1px solid rgba(244,114,182,0.12);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+ 
+    .stat-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+ 
+    .stat-icon {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+ 
+    .stat-number {
+      font-size: 30px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--pink-mid), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
+    }
+ 
+    .stat-label {
+      font-size: 13px;
+      color: var(--text-mid);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+ 
+    /* ── FEATURES ── */
+    .features {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 5% 72px;
+    }
+ 
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--pink-mid);
+      margin-bottom: 32px;
+    }
+ 
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+ 
+    .feature-card {
+      background: #fff;
+      border-radius: var(--radius-md);
+      padding: 28px 24px;
+      border: 1px solid rgba(244,114,182,0.10);
+      box-shadow: var(--shadow-sm);
+    }
+ 
+    .feature-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+ 
+    .fi-pink { background: #fce7f3; }
+    .fi-purple { background: #ede9fe; }
+    .fi-blue { background: #dbeafe; }
+ 
+    .feature-card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+ 
+    .feature-card p {
+      font-size: 13px;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+ 
+    /* ── GALLERY ── */
+    .gallery {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 5% 96px;
+    }
+ 
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+ 
+    .case-card {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      border: 1px solid rgba(244,114,182,0.10);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+ 
+    .case-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+ 
+    .case-badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 10px;
+    }
+ 
+    .badge-hot { background: #fee2e2; color: #ef4444; }
+    .badge-new { background: #d1fae5; color: #10b981; }
+    .badge-trending { background: #fef3c7; color: #f59e0b; }
+ 
+    .case-svg-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+ 
+    .case-svg-wrap svg {
+      width: 120px;
+      height: 180px;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.10));
+    }
+ 
+    .case-info h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 3px;
+    }
+ 
+    .case-info p {
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+ 
+    /* ── UPLOAD CARD ── */
+    .upload-card {
+      border: 2px dashed rgba(244,114,182,0.3);
+      background: linear-gradient(135deg, #fff8fc, #f5f0ff);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 260px;
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+ 
+    .upload-card:hover {
+      border-color: var(--pink-mid);
+      transform: translateY(-4px);
+    }
+ 
+    .upload-icon {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink-mid), var(--purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+ 
+    .upload-card h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+    }
+ 
+    .upload-card p {
+      font-size: 13px;
+      color: var(--text-soft);
+      text-align: center;
+      max-width: 160px;
+    }
+ 
+    /* responsive */
+    @media (max-width: 768px) {
+      .hero { flex-direction: column; min-height: auto; padding-top: 48px; }
+      .hero-right { order: -1; }
+      .stats-grid, .features-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+ 
+<body>
+ 
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="nav-content">
+      <div class="logo">
+        <div class="logo-dot"></div>
+        Cadeau Case
+      </div>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="#">Customize</a>
+        <a href="../auth/login.html" class="btn-login">Login</a>
+      </nav>
+    </div>
+  </header>
+ 
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="badge-new">
+        <div class="badge-dot"></div>
+        New — 3D Preview is Live
+      </div>
+ 
+      <h1>
+        <span>Uniquely</span><br>
+        Yours
+      </h1>
+ 
+      <p>
+        Upload your art, photo, or idea. We'll turn it into a premium custom phone case — delivered in 48 hours.
+      </p>
+ 
+      <div class="hero-cta">
+        <div class="input-row">
+          <input class="hero-input" type="text" placeholder="Describe your design…">
+          <button class="btn-primary">Create Now</button>
+        </div>
+      </div>
+ 
+      <div class="social-proof">
+        <div class="avatars">
+          <span class="av1">A</span>
+          <span class="av2">M</span>
+          <span class="av3">J</span>
+          <span class="av4">K</span>
+        </div>
+        <p><strong>12,000+</strong> cases designed this month</p>
+      </div>
+    </div>
+ 
+    <div class="hero-right">
+      <div class="phone-mockup">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <!-- Sakura hero artwork -->
+            <svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="bg-hero" cx="50%" cy="50%">
+                  <stop offset="0%" stop-color="#fce7f3"/>
+                  <stop offset="100%" stop-color="#e0e7ff"/>
+                </radialGradient>
+              </defs>
+              <circle cx="70" cy="70" r="70" fill="url(#bg-hero)"/>
+              <!-- petals -->
+              <ellipse cx="70" cy="48" rx="10" ry="18" fill="#f9a8d4" opacity="0.9" transform="rotate(0 70 70)"/>
+              <ellipse cx="70" cy="48" rx="10" ry="18" fill="#f472b6" opacity="0.7" transform="rotate(72 70 70)"/>
+              <ellipse cx="70" cy="48" rx="10" ry="18" fill="#f9a8d4" opacity="0.9" transform="rotate(144 70 70)"/>
+              <ellipse cx="70" cy="48" rx="10" ry="18" fill="#f472b6" opacity="0.7" transform="rotate(216 70 70)"/>
+              <ellipse cx="70" cy="48" rx="10" ry="18" fill="#f9a8d4" opacity="0.9" transform="rotate(288 70 70)"/>
+              <circle cx="70" cy="70" r="12" fill="#fbbf24"/>
+              <circle cx="70" cy="70" r="7" fill="#f59e0b"/>
+              <!-- small dots -->
+              <circle cx="66" cy="66" r="1.5" fill="#fff" opacity="0.8"/>
+              <circle cx="74" cy="66" r="1.5" fill="#fff" opacity="0.8"/>
+              <circle cx="70" cy="73" r="1.5" fill="#fff" opacity="0.8"/>
+            </svg>
+          </div>
+        </div>
+ 
+        <!-- floating chips -->
+        <div class="chip chip-ship">
+          <span class="chip-emoji">🚚</span>
+          <div>
+            <div style="font-weight:600;font-size:12px;color:#1e1b4b;">Ships in 48h</div>
+            <div style="font-size:11px;color:#9ca3af;">Premium delivery</div>
+          </div>
+        </div>
+ 
+        <div class="chip chip-upload">
+          <span class="chip-emoji">✨</span>
+          <div style="font-size:12px;font-weight:600;color:#1e1b4b;">Your art, here</div>
+        </div>
+ 
+        <div class="chip chip-dots">
+          <span style="background:#ec4899;" class="chip-emoji" style="font-size:10px;">●</span>
+          <span style="width:10px;height:10px;border-radius:50%;display:block;background:#a78bfa;"></span>
+          <span style="width:10px;height:10px;border-radius:50%;display:block;background:#34d399;"></span>
+          <span style="width:10px;height:10px;border-radius:50%;display:block;background:#fbbf24;"></span>
+          <span style="width:10px;height:10px;border-radius:50%;display:block;background:#fb7185;"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- STATS -->
+  <section class="stats">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">📦</div>
+        <div class="stat-number">50K+</div>
+        <div class="stat-label">Cases shipped worldwide</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⭐</div>
+        <div class="stat-number">4.9</div>
+        <div class="stat-label">Average customer rating</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⚡</div>
+        <div class="stat-number">48h</div>
+        <div class="stat-label">Average delivery time</div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- WHY CADEAU CASE -->
+  <section class="features">
+    <div class="section-label">Why Cadeau Case</div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon fi-pink">🖼️</div>
+        <h3>Any format, any art</h3>
+        <p>JPG, PNG, or vector — our editor handles it all with auto-crop and smart scaling.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-purple">📱</div>
+        <h3>Live 3D preview</h3>
+        <p>See exactly how your design looks on your phone before you order. No surprises.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-blue">🚀</div>
+        <h3>48-hour delivery</h3>
+        <p>Most customers receive their case within 48 hours of placing an order.</p>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- GALLERY -->
+  <section class="gallery">
+    <div class="section-label">Our Collection</div>
+    <div class="gallery-grid">
+ 
+      <!-- 1 Sakura Bloom -->
+      <div class="case-card">
+        <div class="case-badge badge-hot">🔥 Hot</div>
+        <div class="case-svg-wrap">
+          <svg viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg">
+            <rect rx="22" ry="22" width="120" height="180" fill="#fce7f3"/>
+            <rect rx="18" ry="18" x="6" y="6" width="108" height="168" fill="#fff0f6"/>
+            <!-- flowers -->
+            <ellipse cx="38" cy="55" rx="9" ry="16" fill="#f9a8d4" opacity="0.9" transform="rotate(0 38 72)"/>
+            <ellipse cx="38" cy="55" rx="9" ry="16" fill="#f472b6" opacity="0.7" transform="rotate(72 38 72)"/>
+            <ellipse cx="38" cy="55" rx="9" ry="16" fill="#f9a8d4" opacity="0.9" transform="rotate(144 38 72)"/>
+            <ellipse cx="38" cy="55" rx="9" ry="16" fill="#f472b6" opacity="0.7" transform="rotate(216 38 72)"/>
+            <ellipse cx="38" cy="55" rx="9" ry="16" fill="#f9a8d4" opacity="0.9" transform="rotate(288 38 72)"/>
+            <circle cx="38" cy="72" r="10" fill="#fbbf24"/>
+            <circle cx="38" cy="72" r="6" fill="#f59e0b"/>
+            <!-- second flower -->
+            <ellipse cx="82" cy="105" rx="8" ry="14" fill="#fda4af" opacity="0.9" transform="rotate(36 82 120)"/>
+            <ellipse cx="82" cy="105" rx="8" ry="14" fill="#fb7185" opacity="0.7" transform="rotate(108 82 120)"/>
+            <ellipse cx="82" cy="105" rx="8" ry="14" fill="#fda4af" opacity="0.9" transform="rotate(180 82 120)"/>
+            <ellipse cx="82" cy="105" rx="8" ry="14" fill="#fb7185" opacity="0.7" transform="rotate(252 82 120)"/>
+            <ellipse cx="82" cy="105" rx="8" ry="14" fill="#fda4af" opacity="0.9" transform="rotate(324 82 120)"/>
+            <circle cx="82" cy="120" r="9" fill="#fbbf24"/>
+            <circle cx="82" cy="120" r="5" fill="#f59e0b"/>
+            <!-- tiny buds -->
+            <circle cx="60" cy="140" r="5" fill="#f9a8d4"/>
+            <circle cx="45" cy="130" r="3" fill="#f472b6" opacity="0.7"/>
+            <circle cx="75" cy="148" r="3.5" fill="#fda4af"/>
+            <!-- stem lines -->
+            <line x1="38" y1="82" x2="38" y2="110" stroke="#86efac" stroke-width="2" stroke-linecap="round"/>
+            <line x1="82" y1="130" x2="60" y2="148" stroke="#86efac" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="case-info">
+          <h4>Sakura Bloom</h4>
+          <p>Floral · Soft Pink</p>
+        </div>
+      </div>
+ 
+      <!-- 2 Galaxy Dream -->
+      <div class="case-card">
+        <div class="case-badge badge-new">✦ New</div>
+        <div class="case-svg-wrap">
+          <svg viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="galaxy-bg" cx="40%" cy="35%">
+                <stop offset="0%" stop-color="#312e81"/>
+                <stop offset="60%" stop-color="#1e1b4b"/>
+                <stop offset="100%" stop-color="#0f0a2e"/>
+              </radialGradient>
+              <radialGradient id="planet-glow" cx="50%" cy="30%">
+                <stop offset="0%" stop-color="#a78bfa"/>
+                <stop offset="100%" stop-color="#6d28d9"/>
+              </radialGradient>
+            </defs>
+            <rect rx="22" ry="22" width="120" height="180" fill="url(#galaxy-bg)"/>
+            <!-- stars -->
+            <circle cx="20" cy="25" r="1.2" fill="#fff" opacity="0.8"/>
+            <circle cx="55" cy="18" r="0.8" fill="#fff" opacity="0.6"/>
+            <circle cx="90" cy="30" r="1.5" fill="#fff" opacity="0.9"/>
+            <circle cx="15" cy="60" r="1" fill="#fff" opacity="0.5"/>
+            <circle cx="100" cy="55" r="0.8" fill="#c4b5fd" opacity="0.9"/>
+            <circle cx="30" cy="120" r="1" fill="#fff" opacity="0.7"/>
+            <circle cx="95" cy="140" r="1.2" fill="#fff" opacity="0.6"/>
+            <circle cx="50" cy="155" r="0.7" fill="#c4b5fd" opacity="0.8"/>
+            <circle cx="70" cy="20" r="0.8" fill="#fff" opacity="0.5"/>
+            <circle cx="108" cy="90" r="1" fill="#fff" opacity="0.7"/>
+            <circle cx="12" cy="100" r="0.8" fill="#a78bfa" opacity="0.9"/>
+            <!-- planet -->
+            <circle cx="60" cy="80" r="32" fill="url(#planet-glow)"/>
+            <circle cx="60" cy="80" r="32" fill="#7c3aed" opacity="0.3"/>
+            <!-- ring -->
+            <ellipse cx="60" cy="80" rx="46" ry="10" fill="none" stroke="#c4b5fd" stroke-width="3.5" opacity="0.6"/>
+            <ellipse cx="60" cy="80" rx="46" ry="10" fill="none" stroke="#a78bfa" stroke-width="1.5" opacity="0.4"/>
+            <!-- planet sheen -->
+            <ellipse cx="50" cy="68" rx="10" ry="6" fill="#c4b5fd" opacity="0.2"/>
+            <!-- moon -->
+            <circle cx="98" cy="135" r="10" fill="#e0e7ff"/>
+            <circle cx="103" cy="133" r="7" fill="#312e81"/>
+          </svg>
+        </div>
+        <div class="case-info">
+          <h4>Galaxy Dream</h4>
+          <p>Space · Deep Purple</p>
+        </div>
+      </div>
+ 
+      <!-- 3 Retro Sunset -->
+      <div class="case-card">
+        <div class="case-badge badge-trending">⚡ Trending</div>
+        <div class="case-svg-wrap">
+          <svg viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="sunset-sky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#f97316"/>
+                <stop offset="45%" stop-color="#ef4444"/>
+                <stop offset="100%" stop-color="#7c3aed"/>
+              </linearGradient>
+              <linearGradient id="sun-grad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#fde68a"/>
+                <stop offset="100%" stop-color="#fbbf24"/>
+              </linearGradient>
+            </defs>
+            <rect rx="22" ry="22" width="120" height="180" fill="url(#sunset-sky)"/>
+            <!-- horizon lines -->
+            <line x1="0" y1="110" x2="120" y2="110" stroke="#f472b6" stroke-width="1" opacity="0.5"/>
+            <line x1="0" y1="118" x2="120" y2="118" stroke="#f472b6" stroke-width="0.5" opacity="0.35"/>
+            <line x1="0" y1="124" x2="120" y2="124" stroke="#f472b6" stroke-width="0.5" opacity="0.25"/>
+            <!-- sun -->
+            <circle cx="60" cy="108" r="28" fill="url(#sun-grad)"/>
+            <!-- sun reflection cut -->
+            <rect x="6" y="110" width="108" height="64" fill="#7c3aed" opacity="0.5" rx="0"/>
+            <rect x="6" y="110" width="108" height="64" fill="#4c1d95" opacity="0.4" rx="0"/>
+            <!-- retro grid lines on ground -->
+            <line x1="60" y1="110" x2="6" y2="174" stroke="#f472b6" stroke-width="0.7" opacity="0.5"/>
+            <line x1="60" y1="110" x2="30" y2="174" stroke="#f472b6" stroke-width="0.7" opacity="0.5"/>
+            <line x1="60" y1="110" x2="55" y2="174" stroke="#f472b6" stroke-width="0.7" opacity="0.5"/>
+            <line x1="60" y1="110" x2="80" y2="174" stroke="#f472b6" stroke-width="0.7" opacity="0.5"/>
+            <line x1="60" y1="110" x2="100" y2="174" stroke="#f472b6" stroke-width="0.7" opacity="0.5"/>
+            <line x1="60" y1="110" x2="120" y2="165" stroke="#f472b6" stroke-width="0.7" opacity="0.5"/>
+            <!-- horizontal grid -->
+            <line x1="6" y1="128" x2="114" y2="128" stroke="#f472b6" stroke-width="0.6" opacity="0.45"/>
+            <line x1="6" y1="143" x2="114" y2="143" stroke="#f472b6" stroke-width="0.6" opacity="0.35"/>
+            <line x1="6" y1="157" x2="114" y2="157" stroke="#f472b6" stroke-width="0.6" opacity="0.25"/>
+            <!-- border frame -->
+            <rect rx="22" ry="22" width="120" height="180" fill="none" stroke="#f97316" stroke-width="2" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="case-info">
+          <h4>Retro Sunset</h4>
+          <p>Gradient · Warm Vibes</p>
+        </div>
+      </div>
+ 
+      <!-- 4 Clean Slate -->
+      <div class="case-card">
+        <div class="case-svg-wrap">
+          <svg viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg">
+            <rect rx="22" ry="22" width="120" height="180" fill="#f8fafc"/>
+            <rect rx="18" ry="18" x="6" y="6" width="108" height="168" fill="#fff" stroke="#e2e8f0" stroke-width="1"/>
+            <!-- minimal linework -->
+            <circle cx="60" cy="75" r="25" fill="none" stroke="#e2e8f0" stroke-width="1.5"/>
+            <circle cx="60" cy="75" r="15" fill="none" stroke="#cbd5e1" stroke-width="1"/>
+            <circle cx="60" cy="75" r="5" fill="#f1f5f9"/>
+            <line x1="60" y1="44" x2="60" y2="106" stroke="#e2e8f0" stroke-width="1" opacity="0.8"/>
+            <line x1="29" y1="75" x2="91" y2="75" stroke="#e2e8f0" stroke-width="1" opacity="0.8"/>
+            <!-- dots at compass points -->
+            <circle cx="60" cy="50" r="2.5" fill="#94a3b8"/>
+            <circle cx="60" cy="100" r="2.5" fill="#94a3b8"/>
+            <circle cx="35" cy="75" r="2.5" fill="#94a3b8"/>
+            <circle cx="85" cy="75" r="2.5" fill="#94a3b8"/>
+            <!-- label text simulation -->
+            <rect x="38" y="128" width="44" height="6" rx="3" fill="#f1f5f9"/>
+            <rect x="46" y="140" width="28" height="4" rx="2" fill="#f8fafc"/>
+          </svg>
+        </div>
+        <div class="case-info">
+          <h4>Clean Slate</h4>
+          <p>Minimal · Pearl White</p>
+        </div>
+      </div>
+ 
+      <!-- 5 Forest Leaf -->
+      <div class="case-card">
+        <div class="case-badge badge-new">✦ New</div>
+        <div class="case-svg-wrap">
+          <svg viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="leaf-bg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#d1fae5"/>
+                <stop offset="100%" stop-color="#a7f3d0"/>
+              </linearGradient>
+            </defs>
+            <rect rx="22" ry="22" width="120" height="180" fill="url(#leaf-bg)"/>
+            <!-- big leaf -->
+            <path d="M60 20 C95 50, 105 110, 60 155 C15 110, 25 50, 60 20 Z" fill="#34d399" opacity="0.85"/>
+            <path d="M60 20 C95 50, 105 110, 60 155 C15 110, 25 50, 60 20 Z" fill="none" stroke="#059669" stroke-width="1.5" opacity="0.5"/>
+            <!-- midrib -->
+            <line x1="60" y1="24" x2="60" y2="150" stroke="#059669" stroke-width="1.8" stroke-linecap="round" opacity="0.7"/>
+            <!-- veins -->
+            <line x1="60" y1="55" x2="85" y2="75" stroke="#059669" stroke-width="1" opacity="0.5"/>
+            <line x1="60" y1="75" x2="88" y2="92" stroke="#059669" stroke-width="1" opacity="0.5"/>
+            <line x1="60" y1="95" x2="86" y2="108" stroke="#059669" stroke-width="1" opacity="0.5"/>
+            <line x1="60" y1="115" x2="80" y2="126" stroke="#059669" stroke-width="1" opacity="0.5"/>
+            <line x1="60" y1="55" x2="35" y2="75" stroke="#059669" stroke-width="1" opacity="0.5"/>
+            <line x1="60" y1="75" x2="32" y2="92" stroke="#059669" stroke-width="1" opacity="0.5"/>
+            <line x1="60" y1="95" x2="34" y2="108" stroke="#059669" stroke-width="1" opacity="0.5"/>
+            <line x1="60" y1="115" x2="40" y2="126" stroke="#059669" stroke-width="1" opacity="0.5"/>
+            <!-- sheen -->
+            <ellipse cx="48" cy="60" rx="7" ry="14" fill="#fff" opacity="0.18" transform="rotate(-15 48 60)"/>
+          </svg>
+        </div>
+        <div class="case-info">
+          <h4>Forest Leaf</h4>
+          <p>Nature · Fresh Green</p>
+        </div>
+      </div>
+ 
+      <!-- 6 Swirl Dream -->
+      <div class="case-card">
+        <div class="case-badge badge-hot">🔥 Hot</div>
+        <div class="case-svg-wrap">
+          <svg viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="swirl-bg" cx="50%" cy="50%">
+                <stop offset="0%" stop-color="#fae8ff"/>
+                <stop offset="100%" stop-color="#e0e7ff"/>
+              </radialGradient>
+            </defs>
+            <rect rx="22" ry="22" width="120" height="180" fill="url(#swirl-bg)"/>
+            <!-- swirl rings -->
+            <circle cx="60" cy="88" r="60" fill="none" stroke="#d946ef" stroke-width="12" opacity="0.14"/>
+            <circle cx="60" cy="88" r="48" fill="none" stroke="#a78bfa" stroke-width="10" opacity="0.18"/>
+            <circle cx="60" cy="88" r="36" fill="none" stroke="#f0abfc" stroke-width="8" opacity="0.22"/>
+            <circle cx="60" cy="88" r="24" fill="none" stroke="#c084fc" stroke-width="7" opacity="0.28"/>
+            <circle cx="60" cy="88" r="13" fill="none" stroke="#a855f7" stroke-width="5" opacity="0.35"/>
+            <circle cx="60" cy="88" r="5" fill="#d946ef" opacity="0.8"/>
+            <!-- accent sparks -->
+            <circle cx="28" cy="42" r="3.5" fill="#f0abfc" opacity="0.7"/>
+            <circle cx="95" cy="52" r="2.5" fill="#a78bfa" opacity="0.7"/>
+            <circle cx="22" cy="130" r="3" fill="#c084fc" opacity="0.6"/>
+            <circle cx="98" cy="138" r="4" fill="#f0abfc" opacity="0.7"/>
+            <circle cx="60" cy="158" r="2.5" fill="#a855f7" opacity="0.5"/>
+          </svg>
+        </div>
+        <div class="case-info">
+          <h4>Swirl Dream</h4>
+          <p>Abstract · Pastel Mix</p>
+        </div>
+      </div>
+ 
+      <!-- 7 Deep Ocean -->
+      <div class="case-card">
+        <div class="case-svg-wrap">
+          <svg viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="ocean-bg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#bae6fd"/>
+                <stop offset="40%" stop-color="#38bdf8"/>
+                <stop offset="100%" stop-color="#0369a1"/>
+              </linearGradient>
+            </defs>
+            <rect rx="22" ry="22" width="120" height="180" fill="url(#ocean-bg)"/>
+            <!-- wave layers -->
+            <path d="M0 100 Q30 85, 60 100 Q90 115, 120 100 L120 180 L0 180 Z" fill="#0284c7" opacity="0.6"/>
+            <path d="M0 118 Q30 103, 60 118 Q90 133, 120 118 L120 180 L0 180 Z" fill="#0369a1" opacity="0.7"/>
+            <path d="M0 136 Q30 121, 60 136 Q90 151, 120 136 L120 180 L0 180 Z" fill="#075985" opacity="0.8"/>
+            <!-- bubbles -->
+            <circle cx="35" cy="90" r="4" fill="#7dd3fc" opacity="0.5"/>
+            <circle cx="80" cy="78" r="2.5" fill="#7dd3fc" opacity="0.6"/>
+            <circle cx="55" cy="65" r="3.5" fill="#bae6fd" opacity="0.5"/>
+            <circle cx="90" cy="105" r="3" fill="#7dd3fc" opacity="0.4"/>
+            <circle cx="18" cy="112" r="2" fill="#bae6fd" opacity="0.6"/>
+            <!-- light rays -->
+            <line x1="40" y1="10" x2="28" y2="95" stroke="#bae6fd" stroke-width="2" opacity="0.2"/>
+            <line x1="60" y1="6" x2="60" y2="95" stroke="#bae6fd" stroke-width="3" opacity="0.18"/>
+            <line x1="80" y1="10" x2="92" y2="95" stroke="#bae6fd" stroke-width="2" opacity="0.2"/>
+            <!-- fish silhouette -->
+            <ellipse cx="72" cy="58" rx="11" ry="6" fill="#0c4a6e" opacity="0.5"/>
+            <path d="M83 58 L92 52 L92 64 Z" fill="#0c4a6e" opacity="0.5"/>
+            <circle cx="67" cy="56" r="1.5" fill="#fff" opacity="0.7"/>
+          </svg>
+        </div>
+        <div class="case-info">
+          <h4>Deep Ocean</h4>
+          <p>Nature · Ocean Blue</p>
+        </div>
+      </div>
+ 
+      <!-- 8 Upload Yours -->
+      <div class="case-card upload-card">
+        <div class="upload-icon">➕</div>
+        <h4>Upload Yours</h4>
+        <p>Add your own photo, logo, or artwork</p>
+      </div>
+ 
+    </div>
+  </section>
+ 
+</body>
+</html>
