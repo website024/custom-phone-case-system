@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+  <title>Customize — Cadeau Case</title>
+
+  <!-- FONT -->
+
+  <link rel="preconnect"
+    href="https://fonts.googleapis.com">
+
+  <link rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fredoka:wght@600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- CSS -->
+
+  <link rel="stylesheet"
+    href="customize.css">
+
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+
+  <header class="navbar">
+
+    <div class="nav-content">
+
+      <a href="../home/index.html"
+        class="logo-wrapper">
+
+        <div class="logo-dot"></div>
+
+        <div class="logo-container">
+
+          <span class="logo-c">C</span>
+          <span class="logo-a">a</span>
+          <span class="logo-d">d</span>
+          <span class="logo-e">e</span>
+          <span class="logo-a2">a</span>
+          <span class="logo-u">u</span>
+
+          <div class="logo-box">
+
+            <span class="logo-case-text">
+              Case
+            </span>
+
+          </div>
+
+        </div>
+
+      </a>
+
+      <nav class="nav-links">
+
+        <a href="../home/index.html">
+          Home
+        </a>
+
+        <a href="#">
+          Gallery
+        </a>
+
+      </nav>
+
+    </div>
+
+  </header>
+
+  <!-- PAGE -->
+
+  <section class="customize-page">
+
+    <!-- LEFT -->
+
+    <div class="custom-left">
+
+      <h1>
+        Customize Your Case
+      </h1>
+
+      <p>
+        Upload your image,
+        choose colors,
+        and create your own design.
+      </p>
+
+      <!-- UPLOAD -->
+
+      <div class="control-group">
+
+        <label>
+          Upload Image
+        </label>
+
+        <input
+          type="file"
+          id="imageInput"
+          accept="image/*">
+
+      </div>
+
+      <!-- TEXT -->
+
+      <div class="control-group">
+
+        <label>
+          Custom Text
+        </label>
+
+        <input
+          type="text"
+          id="customText"
+          placeholder="Type something...">
+
+      </div>
+
+      <!-- COLOR -->
+
+<div class="control-group">
+
+  <label>
+    Case Color
+  </label>
+
+  <div class="picker-wrapper">
+
+    <input
+      type="color"
+      id="caseColorPicker"
+      value="#f472b6">
+
+    <span>
+      Choose any color you like
+    </span>
+
+  </div>
+
+</div>
+
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+
+    <div class="custom-right">
+
+      <div class="phone-case"
+        id="phoneCase">
+
+        <div class="image-layer">
+
+  <img
+    id="previewImage"
+    src=""
+    alt="">
+
+</div>
+
+        <div id="previewText">
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- JS -->
+
+  <script src="customize.js"></script>
+
+</body>
+
+</html>
