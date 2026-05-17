@@ -120,3 +120,85 @@ a{
 
   opacity:1;
 }
+
+.btn-submit:disabled{
+
+  opacity:0.7;
+
+  cursor:not-allowed;
+}
+
+/* NAV USER */
+
+.nav-user{
+
+  font-size:14px;
+
+  font-weight:700;
+
+  color:#ec4899;
+}
+
+/* LOGOUT */
+
+.logout-btn{
+
+  border:none;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ec4899,
+      #a855f7
+    );
+
+  color:white;
+
+  height:42px;
+
+  padding:0 22px;
+
+  border-radius:999px;
+
+  font-family:'DM Sans', sans-serif;
+
+  font-size:14px;
+
+  font-weight:700;
+
+  letter-spacing:0.2px;
+
+  cursor:pointer;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  box-shadow:
+    0 8px 20px rgba(236,72,153,0.22);
+
+  transition:
+    transform 0.25s,
+    opacity 0.25s,
+    box-shadow 0.25s;
+}
+
+.logout-btn:hover{
+
+  transform:
+    translateY(-2px);
+
+  opacity:0.92;
+
+  box-shadow:
+    0 12px 24px rgba(236,72,153,0.28);
+}
+
+.logout-btn:active{
+
+  transform:
+    scale(0.96);
+}
+
