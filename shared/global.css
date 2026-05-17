@@ -73,3 +73,50 @@ a{
 
   opacity:0.9;
 }
+
+/* TOAST */
+
+.toast{
+
+  position:fixed;
+
+  top:24px;
+  right:24px;
+
+  padding:14px 20px;
+
+  border-radius:14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ec4899,
+      #a855f7
+    );
+
+  color:white;
+
+  font-size:14px;
+
+  font-weight:600;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.15);
+
+  transform:
+    translateY(-20px);
+
+  opacity:0;
+
+  transition:0.3s;
+
+  z-index:9999;
+}
+
+.toast.show{
+
+  transform:
+    translateY(0);
+
+  opacity:1;
+}

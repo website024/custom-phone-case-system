@@ -12,16 +12,24 @@ if (registerBtn) {
     function () {
 
       const name =
-        document.querySelector("#register-name").value;
+        document.querySelector(
+          "#register-name"
+        ).value;
 
       const email =
-        document.querySelector("#register-email").value;
+        document.querySelector(
+          "#register-email"
+        ).value;
 
       const password =
-        document.querySelector("#register-password").value;
+        document.querySelector(
+          "#register-password"
+        ).value;
 
       const confirmPassword =
-        document.querySelector("#register-confirm").value;
+        document.querySelector(
+          "#register-confirm"
+        ).value;
 
       /* VALIDATION */
 
@@ -32,17 +40,30 @@ if (registerBtn) {
         !confirmPassword
       ) {
 
-        alert("Please fill all fields");
+        showToast(
+          "Please fill all fields"
+        );
 
         return;
       }
 
-      if (password !== confirmPassword) {
+      if (
+        password !== confirmPassword
+      ) {
 
-        alert("Passwords do not match");
+        showToast(
+          "Passwords do not match"
+        );
 
         return;
       }
+
+      /* LOADING */
+
+      registerBtn.innerHTML =
+        "Loading...";
+
+      registerBtn.disabled = true;
 
       /* USER OBJECT */
 
@@ -62,10 +83,20 @@ if (registerBtn) {
         JSON.stringify(user)
       );
 
-      alert("Register successful");
+      /* TOAST */
 
-      window.location.href =
-        "login.html";
+      showToast(
+        "Register successful"
+      );
+
+      /* REDIRECT */
+
+      setTimeout(function () {
+
+        window.location.href =
+          "login.html";
+
+      }, 1500);
     }
   );
 }
@@ -75,7 +106,9 @@ if (registerBtn) {
 ========================= */
 
 const loginBtn =
-  document.querySelector(".login-btn");
+  document.querySelector(
+    ".login-btn"
+  );
 
 if (loginBtn) {
 
@@ -84,10 +117,14 @@ if (loginBtn) {
     function () {
 
       const email =
-        document.querySelector("#login-email").value;
+        document.querySelector(
+          "#login-email"
+        ).value;
 
       const password =
-        document.querySelector("#login-password").value;
+        document.querySelector(
+          "#login-password"
+        ).value;
 
       /* GET USER */
 
@@ -100,7 +137,7 @@ if (loginBtn) {
 
       if (!savedUser) {
 
-        alert(
+        showToast(
           "No account found"
         );
 
@@ -114,9 +151,12 @@ if (loginBtn) {
         password === savedUser.password
       ) {
 
-        alert(
-          "Login successful"
-        );
+        /* LOADING */
+
+        loginBtn.innerHTML =
+          "Loading...";
+
+        loginBtn.disabled = true;
 
         /* LOGIN STATUS */
 
@@ -125,14 +165,24 @@ if (loginBtn) {
           "true"
         );
 
+        /* TOAST */
+
+        showToast(
+          "Login successful"
+        );
+
         /* REDIRECT */
 
-        window.location.href =
-          "../home/index.html";
+        setTimeout(function () {
+
+          window.location.href =
+            "../home/index.html";
+
+        }, 1500);
 
       } else {
 
-        alert(
+        showToast(
           "Invalid email or password"
         );
       }
@@ -145,7 +195,9 @@ if (loginBtn) {
 ========================= */
 
 const adminBtn =
-  document.querySelector(".admin-btn");
+  document.querySelector(
+    ".admin-btn"
+  );
 
 if (adminBtn) {
 
@@ -154,33 +206,55 @@ if (adminBtn) {
     function () {
 
       const email =
-        document.querySelector("#admin-email").value;
+        document.querySelector(
+          "#admin-email"
+        ).value;
 
       const password =
-        document.querySelector("#admin-password").value;
+        document.querySelector(
+          "#admin-password"
+        ).value;
 
-      /* DEMO ADMIN */
+      /* ADMIN CHECK */
 
       if (
-        email === "admin@cadeaucase.com" &&
+        email ===
+          "admin@cadeaucase.com" &&
         password === "admin123"
       ) {
 
-        alert(
-          "Admin login successful"
-        );
+        /* LOADING */
+
+        adminBtn.innerHTML =
+          "Loading...";
+
+        adminBtn.disabled = true;
+
+        /* ADMIN STATUS */
 
         localStorage.setItem(
           "isAdmin",
           "true"
         );
 
-        window.location.href =
-          "../home/index.html";
+        /* TOAST */
+
+        showToast(
+          "Admin login successful"
+        );
+
+        /* REDIRECT */
+
+        setTimeout(function () {
+
+          window.location.href =
+            "../home/index.html";
+
+        }, 1500);
 
       } else {
 
-        alert(
+        showToast(
           "Invalid admin account"
         );
       }
