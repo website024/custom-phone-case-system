@@ -47,9 +47,9 @@
   <main class="customize-page">
     <section class="tools-panel">
       <h1>Customize Your Case</h1>
-      <p class="sub-text">Chọn dòng máy, thêm ảnh, chữ, sticker và kéo thả trong ốp.</p>
+      <p class="sub-text">Choose your phone model, add photos, text, stickers, and drag and drop them into the phone case.</p>
 
-      <label>Dòng máy</label>
+      <label>Phone models</label>
       <select id="deviceModel">
         <option value="iphone-x">iPhone X</option>
         <option value="iphone-xr">iPhone XR</option>
@@ -98,23 +98,23 @@
         <option value="ipad-pro-m5">iPad Pro M5</option>
       </select>
 
-      <label>Loại ốp</label>
+      <label>Case type</label>
       <select id="caseType">
-        <option value="clear" data-price="120000">Ốp trong suốt - 120.000đ</option>
-        <option value="silicone" data-price="150000">Ốp silicon - 150.000đ</option>
-        <option value="shockproof" data-price="180000">Ốp chống sốc - 180.000đ</option>
-        <option value="matte" data-price="160000">Ốp nhám - 160.000đ</option>
+        <option value="clear" data-price="120000">Clear case - 120.000đ</option>
+        <option value="silicone" data-price="150000">Silicone case - 150.000đ</option>
+        <option value="shockproof" data-price="180000">Shockproof case - 180.000đ</option>
+        <option value="matte" data-price="160000">Matte case - 160.000đ</option>
       </select>
 
-      <label>Upload ảnh</label>
+      <label>Upload photos</label>
       <input type="file" id="imageUpload" accept="image/*" />
-      <button type="button" id="removeBgBtn">Tách nền trắng</button>
+      <button type="button" id="removeBgBtn">Separate the white background.</button>
 
-      <label>Thêm chữ</label>
-      <input type="text" id="customText" placeholder="Nhập chữ muốn in..." />
-      <button type="button" id="addTextBtn">Thêm chữ lên ốp</button>
+      <label>Add text</label>
+      <input type="text" id="customText" placeholder="Enter text to print..." />
+      <button type="button" id="addTextBtn">Add text to case</button>
 
-      <label>Font chữ</label>
+      <label>Font</label>
       <select id="fontSelect">
         <option value="Arial">Arial</option>
         <option value="Georgia">Georgia</option>
@@ -124,7 +124,7 @@
         <option value="Impact">Impact</option>
       </select>
 
-      <label>Màu chữ</label>
+      <label>Text Color</label>
       <input type="color" id="textColor" value="#20164d" />
 
       <label>Sticker</label>
@@ -142,18 +142,18 @@
         <button type="button" class="sticker-btn" data-sticker="images/stickers/11.png"><img src="images/stickers/11.png"></button>
       </div>
 
-      <label>Phụ kiện đi kèm</label>
+      <label>Accessories</label>
       <div class="accessory-list">
         <label><input type="checkbox" class="accessory" value="Dây đeo" data-price="30000"> Dây đeo +30.000đ</label>
         <label><input type="checkbox" class="accessory" value="Charm" data-price="25000"> Charm +25.000đ</label>
         <label><input type="checkbox" class="accessory" value="Sticker pack" data-price="20000"> Sticker pack +20.000đ</label>
       </div>
 
-      <div class="price-box">Tổng giá: <strong id="totalPrice">120.000đ</strong></div>
+      <div class="price-box">Total price: <strong id="totalPrice">120.000đ</strong></div>
 
       <div class="button-row">
-        <button id="saveDesignBtn">Lưu mẫu</button>
-        <button id="addToCartBtn">Thêm vào giỏ hàng</button>
+        <button id="saveDesignBtn">Save Design</button>
+        <button id="addToCartBtn">Add to Cart</button>
       </div>
     </section>
 
@@ -166,19 +166,19 @@
         <img id="caseFrame" src="images/ipX.png" alt="case frame">
       </div>
 
-      <p class="hint">Kéo item trong ốp. Lăn chuột để zoom. Bấm × để xoá.</p>
+      <p class="hint">Drag items into the case. Scroll to zoom. Click × to delete.</p>
     </section>
   </main>
 
   <div class="preview-modal" id="previewModal">
     <div class="preview-box">
-      <h2>Mẫu đã lưu</h2>
+      <h2>Saved Designs</h2>
 
       <div class="saved-preview" id="savedPreview"></div>
 
       <div class="modal-actions">
-        <button id="editAgainBtn">Chỉnh sửa</button>
-        <button id="confirmCartBtn">Thêm vào giỏ hàng</button>
+        <button id="editAgainBtn">Edit Again</button>
+        <button id="confirmCartBtn">Add to Cart</button>
       </div>
     </div>
   </div>
