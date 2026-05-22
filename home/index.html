@@ -863,14 +863,14 @@
         </div>
 
         <!-- Cart icon with badge -->
-        <a href="#" class="nav-icon-btn nav-cart" title="Cart">
-          <svg class="nav-icon" viewBox="0 0 24 24">
-            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <path d="M16 10a4 4 0 0 1-8 0"></path>
-          </svg>
-          <span class="cart-badge">0</span>
-        </a>
+        <a href="../cart/cart.html" class="nav-icon-btn nav-cart" title="Cart">
+  <svg class="nav-icon" viewBox="0 0 24 24">
+    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+    <line x1="3" y1="6" x2="21" y2="6"></line>
+    <path d="M16 10a4 4 0 0 1-8 0"></path>
+  </svg>
+  <span class="cart-badge" id="homeCartCount">0</span>
+</a>
       </nav>
 
     </div>
@@ -1250,5 +1250,13 @@
   <script src="../shared/navbar.js"></script>
   <script src="../shared/shared.js"></script>
   <script src="home.js"></script>
+  <script>
+  const homeCartCount = document.getElementById("homeCartCount");
+  const homeCart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  if (homeCartCount) {
+    homeCartCount.textContent = homeCart.length;
+  }
+</script>
 </body>
 </html>
