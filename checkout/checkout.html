@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout — Cadeau Case</title>
+  <link rel="stylesheet" href="checkout.css" />
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="nav-content">
+      <a class="logo-wrapper" href="../home/index.html">
+        <span class="logo-dot"></span>
+        <span class="logo-container">
+          <span class="logo-c">C</span><span class="logo-a">a</span><span class="logo-d">d</span><span class="logo-e">e</span><span class="logo-a2">a</span><span class="logo-u">u</span>
+          <span class="logo-box"><span class="logo-case-text">CASE</span></span>
+        </span>
+      </a>
+
+      <nav class="nav-links">
+        <a href="../home/index.html">Home</a><span class="nav-divider">|</span>
+        <a href="../customize/customize.html">Customize</a><span class="nav-divider">|</span>
+        <a href="../cart/cart.html">Cart</a><span class="nav-divider">|</span>
+        <a href="../my-orders/my-orders.html">My Orders</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="checkout-page">
+    <section class="checkout-header">
+      <span class="page-tag">Checkout</span>
+      <h1>Confirm Your Order</h1>
+      <p>Enter your delivery information and choose a payment method.</p>
+    </section>
+
+    <section class="checkout-layout">
+      <form class="checkout-form" id="checkoutForm">
+        <h2>Delivery Information</h2>
+
+        <div class="field">
+          <label>Full Name</label>
+          <input type="text" id="fullName" placeholder="Enter your full name" />
+        </div>
+
+        <div class="field">
+          <label>Phone Number</label>
+          <input type="text" id="phoneNumber" placeholder="Enter your phone number" />
+        </div>
+
+        <div class="field">
+          <label>Delivery Address</label>
+          <textarea id="address" placeholder="Enter your delivery address"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Order Note</label>
+          <textarea id="note" placeholder="Optional note"></textarea>
+        </div>
+
+        <h2>Payment Method</h2>
+
+        <div class="payment-options">
+          <label>
+            <input type="radio" name="payment" value="COD" checked />
+            Cash on Delivery
+          </label>
+
+          <label>
+            <input type="radio" name="payment" value="Bank Transfer" />
+            Bank Transfer
+          </label>
+
+          <label>
+            <input type="radio" name="payment" value="E-wallet" />
+            E-wallet
+          </label>
+        </div>
+
+        <button type="submit" class="btn-primary">Place Order</button>
+      </form>
+
+      <aside class="order-summary">
+        <h2>Order Summary</h2>
+
+        <div id="checkoutItems"></div>
+
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <strong id="checkoutSubtotal">0đ</strong>
+        </div>
+
+        <div class="summary-row">
+          <span>Shipping</span>
+          <strong id="checkoutShipping">0đ</strong>
+        </div>
+
+        <div class="summary-total">
+          <span>Total</span>
+          <strong id="checkoutTotal">0đ</strong>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <script src="checkout.js"></script>
+</body>
+</html>
