@@ -1,87 +1,12 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cart — Cadeau Case</title>
-  <link rel="stylesheet" href="../customize/customize.css">
-  <style>
-    .cart-page {
-      padding: 50px 7%;
-      background: #fff;
-      min-height: calc(100vh - 85px);
-    }
 
-    .cart-title {
-      font-size: 40px;
-      margin-bottom: 30px;
-      color: #1e1b4b;
-    }
-
-    .cart-list {
-      display: grid;
-      gap: 24px;
-    }
-
-    .cart-item {
-      display: grid;
-      grid-template-columns: 260px 1fr;
-      gap: 28px;
-      padding: 24px;
-      border: 1px solid #f5cde3;
-      border-radius: 24px;
-      background: #fff8fc;
-      align-items: center;
-    }
-
-    .cart-preview {
-      transform: scale(0.55);
-      transform-origin: top left;
-      width: 220px;
-      height: 330px;
-    }
-
-    .cart-info h2 {
-      margin: 0 0 10px;
-    }
-
-    .cart-info p {
-      margin: 6px 0;
-      color: #64748b;
-    }
-
-    .cart-price {
-      font-size: 22px;
-      font-weight: 900;
-      color: #ec4899;
-      margin-top: 12px;
-    }
-
-    .cart-actions {
-      margin-top: 30px;
-      display: flex;
-      gap: 14px;
-    }
-
-    .cart-actions a,
-    .cart-actions button {
-      padding: 14px 22px;
-      border-radius: 16px;
-      border: none;
-      font-weight: 800;
-      cursor: pointer;
-      text-decoration: none;
-    }
-
-    .continue-btn {
-      background: #ffe1f2;
-      color: #ec4899;
-    }
-
-    .checkout-btn {
-      background: linear-gradient(135deg, #ec4899, #c53bff);
-      color: white;
-    }
-  </style>
+  <link rel="stylesheet" href="../customize/customize.css" />
+  <link rel="stylesheet" href="cart.css" />
 </head>
 
 <body>
@@ -107,174 +32,44 @@
   </header>
 
   <main class="cart-page">
-    <h1 class="cart-title">Your Cart</h1>
-    <div id="cartList" class="cart-list"></div>
+    <section class="cart-header">
+      <span class="page-tag">Shopping Cart</span>
+      <h1>Your Custom Cases</h1>
+      <p>Review your customized phone cases before checkout.</p>
+    </section>
 
-    <div class="cart-actions">
-      <a href="../customize/customize.html" class="continue-btn">Continue Editing</a>
-      <a href="../checkout/checkout.html" class="checkout-btn">Checkout</a>
-      <button class="continue-btn" id="clearCartBtn">Clear Cart</button>
-    </div>
+    <section class="cart-layout">
+      <div class="cart-items" id="cartItems"></div>
+
+      <aside class="cart-summary">
+        <h2>Order Summary</h2>
+
+        <div class="summary-row">
+          <span>Total Items</span>
+          <strong id="totalItems">0</strong>
+        </div>
+
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <strong id="subtotal">0đ</strong>
+        </div>
+
+        <div class="summary-row">
+          <span>Shipping</span>
+          <strong id="shippingFee">30.000đ</strong>
+        </div>
+
+        <div class="summary-total">
+          <span>Total</span>
+          <strong id="grandTotal">0đ</strong>
+        </div>
+
+        <button id="checkoutBtn" class="btn-primary">Proceed to Checkout</button>
+        <a href="../customize/customize.html" class="btn-secondary">Continue Editing</a>
+      </aside>
+    </section>
   </main>
 
-  <script>
-    const cartList = document.getElementById("cartList");
-    const cartCount = document.getElementById("cartCount");
-    const clearCartBtn = document.getElementById("clearCartBtn");
-
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    cartCount.textContent = cart.length;
-
-    const layoutByFrame = {
-      "ipX.png": {
-        workspaceW: 300, workspaceH: 560,
-        body: { top: 95, left: 62, width: 176, height: 350, radius: 30 },
-        camera: { top: 95, left: 62, width: 58, height: 105, radius: 24 }
-      },
-      "normal.png": {
-        workspaceW: 300, workspaceH: 560,
-        body: { top: 98, left: 64, width: 172, height: 342, radius: 30 },
-        camera: { top: 100, left: 65, width: 54, height: 75, radius: 20 }
-      },
-      "pro.png": {
-        workspaceW: 300, workspaceH: 560,
-        body: { top: 94, left: 60, width: 180, height: 350, radius: 32 },
-        camera: { top: 95, left: 62, width: 88, height: 120, radius: 28 }
-      },
-      "16e.png": {
-        workspaceW: 300, workspaceH: 560,
-        body: { top: 96, left: 63, width: 174, height: 345, radius: 30 },
-        camera: { top: 97, left: 64, width: 58, height: 82, radius: 22 }
-      },
-      "plus.png": {
-        workspaceW: 300, workspaceH: 560,
-        body: { top: 96, left: 62, width: 176, height: 348, radius: 31 },
-        camera: { top: 97, left: 63, width: 62, height: 88, radius: 22 }
-      },
-      "17pro.png": {
-        workspaceW: 300, workspaceH: 560,
-        body: { top: 94, left: 60, width: 180, height: 350, radius: 32 },
-        camera: { top: 95, left: 62, width: 92, height: 126, radius: 30 }
-      },
-      "ipad.png": {
-        workspaceW: 380, workspaceH: 520,
-        body: { top: 68, left: 70, width: 240, height: 360, radius: 26 },
-        camera: { top: 78, left: 82, width: 42, height: 42, radius: 50 }
-      },
-      "ipad pro.png": {
-        workspaceW: 380, workspaceH: 520,
-        body: { top: 65, left: 68, width: 244, height: 365, radius: 28 },
-        camera: { top: 76, left: 82, width: 44, height: 44, radius: 50 }
-      }
-    };
-
-    function formatPrice(price) {
-      return price.toLocaleString("vi-VN") + "đ";
-    }
-
-    function applyLayout(workspace, frameName) {
-      const layout = layoutByFrame[frameName] || layoutByFrame["ipX.png"];
-
-      workspace.style.setProperty("--workspace-w", layout.workspaceW + "px");
-      workspace.style.setProperty("--workspace-h", layout.workspaceH + "px");
-
-      workspace.style.setProperty("--body-top", layout.body.top + "px");
-      workspace.style.setProperty("--body-left", layout.body.left + "px");
-      workspace.style.setProperty("--body-w", layout.body.width + "px");
-      workspace.style.setProperty("--body-h", layout.body.height + "px");
-      workspace.style.setProperty("--body-radius", layout.body.radius + "px");
-
-      workspace.style.setProperty("--camera-top", layout.camera.top + "px");
-      workspace.style.setProperty("--camera-left", layout.camera.left + "px");
-      workspace.style.setProperty("--camera-w", layout.camera.width + "px");
-      workspace.style.setProperty("--camera-h", layout.camera.height + "px");
-      workspace.style.setProperty("--camera-radius", layout.camera.radius + "px");
-    }
-
-    function renderPreview(item) {
-      const workspace = document.createElement("div");
-      workspace.className = "case-workspace";
-
-      const designArea = document.createElement("div");
-      designArea.className = "design-area";
-
-      item.designItems.forEach((design) => {
-        const el = document.createElement("div");
-        el.className = "design-item";
-        el.style.left = design.left;
-        el.style.top = design.top;
-        el.style.width = design.width;
-        el.style.height = design.height;
-
-        if (design.type === "text") {
-          el.classList.add("design-text");
-          el.textContent = design.content;
-          el.style.color = design.color;
-          el.style.fontFamily = design.fontFamily;
-          el.style.fontSize = design.fontSize;
-        } else {
-          const img = document.createElement("img");
-          img.src = design.content;
-          el.appendChild(img);
-        }
-
-        designArea.appendChild(el);
-      });
-
-      const cameraMask = document.createElement("div");
-      cameraMask.className = "camera-mask";
-
-      const frame = document.createElement("img");
-      frame.id = "caseFrame";
-      frame.src = `../customize/images/${item.frame}`;
-
-      workspace.appendChild(designArea);
-      workspace.appendChild(cameraMask);
-      workspace.appendChild(frame);
-
-      applyLayout(workspace, item.frame);
-
-      return workspace;
-    }
-
-    function renderCart() {
-      if (cart.length === 0) {
-        cartList.innerHTML = "<p>Giỏ hàng đang trống.</p>";
-        return;
-      }
-
-      cartList.innerHTML = "";
-
-      cart.forEach((item) => {
-        const row = document.createElement("div");
-        row.className = "cart-item";
-
-        const previewWrap = document.createElement("div");
-        previewWrap.className = "cart-preview";
-        previewWrap.appendChild(renderPreview(item));
-
-        const info = document.createElement("div");
-        info.className = "cart-info";
-        info.innerHTML = `
-          <h2>${item.deviceModel}</h2>
-          <p>${item.caseType}</p>
-          <p>Số lượng: ${item.quantity}</p>
-          <div class="cart-price">${formatPrice(item.price)}</div>
-        `;
-
-        row.appendChild(previewWrap);
-        row.appendChild(info);
-
-        cartList.appendChild(row);
-      });
-    }
-
-    clearCartBtn.addEventListener("click", function () {
-      localStorage.removeItem("cart");
-      location.reload();
-    });
-
-    renderCart();
-  </script>
+  <script src="cart.js"></script>
 </body>
 </html>
