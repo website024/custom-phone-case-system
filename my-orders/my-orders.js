@@ -1,49 +1,93 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // Dữ liệu mô phỏng lấy từ hệ thống đặt hàng của Cadeau Case
-    const mockOrders = [
-        {
-            id: "CAD-98234",
-            date: "23/05/2026",
-            phoneModel: "iPhone 15 Pro Max",
-            caseType: "Ốp Chống Sốc Trong Suốt (Custom Name)",
-            image: "../images/products/phone-case-demo.jpg", 
-            price: "185.000đ",
-            status: "production",
-            statusText: "Đang sản xuất"
-        },
-        {
-            id: "CAD-97112",
-            date: "18/05/2026",
-            phoneModel: "Samsung S25 Ultra",
-            caseType: "Ốp Nhám Mờ Pastel + Sticker",
-            image: "../images/products/phone-case-demo2.jpg",
-            price: "210.000đ",
-            status: "delivered",
-            statusText: "Đã giao hàng"
+// Dữ liệu đơn hàng giả lập đồng bộ với quy trình hệ thống
+const mockOrders = [
+    {
+        id: "ORD-2026-001",
+        date: "22/05/2026",
+        phoneModel: "iPhone 15 Pro Max",
+        caseType: "Ốp Silicon chống sốc",
+        accessories: "Dây đeo hạt charm",
+        previewUrl: "../images/products/sample-case-1.jpg", 
+        status: "Production", // Pending, Production, Shipping, Delivered
+        totalPrice: "280000"
+    },
+    {
+        id: "ORD-2026-002",
+        date: "18/05/2026",
+        phoneModel: "Samsung Galaxy S25 Ultra",
+        caseType: "Ốp nhám mờ viền màu",
+        accessories: "Gương mini dán mặt sau",
+        previewUrl: "../images/products/sample-case-2.jpg",
+        status: "Delivered",
+        totalPrice: "310000"
+    }
+];
+
+document.addEventListener("DOMContentLoaded", () => {
+    renderOrders("all");
+    initFilterEvents();
+});
+
+function renderOrders(statusFilter) {
+    const ordersContainer = document.getElementById("orders-list");
+    ordersContainer.innerHTML = "";
+
+    const filteredOrders = statusFilter === "all" 
+        ? mockOrders 
+        : mockOrders.filter(o => o.status === statusFilter);
+
+    if (filteredOrders.length === 0) {
+        ordersContainer.innerHTML = `<div class="no-orders"><p>Không tìm thấy đơn hàng nào thuộc trạng thái này.</p></div>`;
+        return;
+    }
+
+    filteredOrders.forEach(order => {
+        let statusText = "";
+        let statusClass = "";
+
+        switch(order.status) {
+            case "Pending": statusText = "Chờ xác nhận"; statusClass = "status-pending"; break;
+            case "Production": statusText = "Đang sản xuất"; statusClass = "status-production"; break;
+            case "Shipping": statusText = "Đang giao hàng"; statusClass = "status-shipping"; break;
+            case "Delivered": statusText = "Đã giao hàng"; statusClass = "status-delivered"; break;
         }
-    ];
 
-    const listContainer = document.getElementById("orders-list");
-
-    listContainer.innerHTML = mockOrders.map(order => `
-        <div class="order-cadeau-card">
-            <div class="card-top-bar">
-                <span class="order-code">Đơn hàng #${order.id}</span>
-                <span class="cadeau-status st-${order.status}">${order.statusText}</span>
+        const card = document.createElement("div");
+        card.className = "order-card";
+        card.innerHTML = `
+            <div class="order-card-header">
+                <div>
+                    <span class="order-id">Mã đơn: ${order.id}</span>
+                    <span style="color: #888; margin-left: 15px;">Ngày đặt: ${order.date}</span>
+                </div>
+                <span class="order-status ${statusClass}">${statusText}</span>
             </div>
-            <div class="card-main-content">
-                <img src="${order.image}" class="product-preview-img" onerror="this.src='https://via.placeholder.com/90x120?text=Cadeau'">
-                <div class="product-info-details">
-                    <h3>${order.phoneModel}</h3>
-                    <p class="order-meta-text"><strong>Phân loại:</strong> ${order.caseType}</p>
-                    <p class="order-meta-text"><strong>Ngày đặt hàng:</strong> ${order.date}</p>
-                    <div class="price-tag-total">${order.price}</div>
+            <div class="order-card-body">
+                <img src="${order.previewUrl}" alt="Preview" class="product-preview-img" onerror="this.src='https://via.placeholder.com/90x120?text=Custom+Case'">
+                <div class="product-details">
+                    <h4 class="product-title">${order.phoneModel}</h4>
+                    <p class="product-meta">Loại ốp: <strong>${order.caseType}</strong></p>
+                    <p class="product-meta">Phụ kiện: <span>${order.accessories || 'Không kèm phụ kiện'}</span></p>
                 </div>
             </div>
-            <div class="card-action-group">
-                <button class="btn-cadeau-primary" onclick="window.location.href='../tracking/tracking.html?orderId=${order.id}'">Track Order</button>
-                ${order.status === 'delivered' ? `<button class="btn-cadeau-secondary" onclick="window.location.href='../feedback/feedback.html?orderId=${order.id}'">Feedback / Complaint</button>` : ''}
+            <div class="order-card-footer">
+                <div class="order-total">Tổng số tiền: <span>${Number(order.totalPrice).toLocaleString('vi-VN')} đ</span></div>
+                <div class="order-actions">
+                    <a href="../tracking/tracking.html?id=${order.id}" class="btn-track">Theo dõi đơn</a>
+                    <a href="../feedback/feedback.html?id=${order.id}" class="btn-feedback">Đánh giá / Khiếu nại</a>
+                </div>
             </div>
-        </div>
-    `).join('');
-});
+        `;
+        ordersContainer.appendChild(card);
+    });
+}
+
+function initFilterEvents() {
+    const buttons = document.querySelectorAll(".filter-btn");
+    buttons.forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            buttons.forEach(b => b.classList.remove("active"));
+            e.target.classList.add("active");
+            renderOrders(e.target.getAttribute("data-status"));
+        });
+    });
+}
