@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tracking Progress - Cadeau Case</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;800&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../shared/global.css">
+  <link rel="stylesheet" href="tracking.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="nav-content">
+      <a href="../home/index.html" class="logo-wrapper">
+        <div class="logo-dot"></div>
+        <div class="logo-container">
+          <span class="logo-c">C</span><span class="logo-a">a</span><span class="logo-d">d</span><span class="logo-e">e</span><span class="logo-a2">a</span><span class="logo-u">u</span>
+          <div class="logo-box"><span class="logo-case-text">Case</span></div>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <a href="../home/index.html" class="nav-text-link">Home</a>
+        <span class="nav-divider">|</span>
+        <a href="../customize/customize.html" class="nav-text-link">Customize</a>
+        <span class="nav-divider">|</span>
+        <a href="../my-orders/my-orders.html" class="nav-text-link active">My Orders</a>
+        <span class="nav-divider">|</span>
+        <a href="tracking.html" class="nav-text-link">Tracking</a>
+        <span class="nav-divider">|</span>
+        <a href="../feedback/feedback.html" class="nav-text-link">Feedback</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="tracking-layout-container">
+    <div class="back-navigation">
+      <a href="../my-orders/my-orders.html">&larr; Trở lại Lịch sử đơn hàng</a>
+    </div>
+
+    <div class="status-tracking-card">
+      <div class="card-head-title">
+        <h3>Hành Trình Đơn Hàng: <span id="lbl-order-id">CAD-2026-9041</span></h3>
+        <p>Hệ thống tự động đồng bộ thời gian thực theo từng khâu xử lý nội bộ.</p>
+      </div>
+
+      <div class="pastel-stepper">
+        <div class="node-step" id="node-Pending">
+          <div class="node-circle">1</div>
+          <div class="node-text">Tiếp nhận<br><small>Pending</small></div>
+        </div>
+        <div class="connector-line"></div>
+        <div class="node-step" id="node-Production">
+          <div class="node-circle">2</div>
+          <div class="node-text">Đang in ấn QC<br><small>Production</small></div>
+        </div>
+        <div class="connector-line"></div>
+        <div class="node-step" id="node-Shipping">
+          <div class="node-circle">3</div>
+          <div class="node-text">Đang giao hàng<br><small>Shipping</small></div>
+        </div>
+        <div class="connector-line"></div>
+        <div class="node-step" id="node-Delivered">
+          <div class="node-circle">4</div>
+          <div class="node-text">Đã nhận hàng<br><small>Delivered</small></div>
+        </div>
+      </div>
+
+      <div class="history-timeline-section">
+        <h4>Nhật ký lịch sử vận hành đơn</h4>
+        <ul id="timeline-logger"></ul>
+      </div>
+    </div>
+  </main>
+
+  <script src="tracking.js"></script>
+</body>
+</html>
