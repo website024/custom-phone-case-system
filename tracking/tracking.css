@@ -1,0 +1,214 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --pink: #f472b6;
+  --pink-light: #fce7f3;
+  --pink-mid: #ec4899;
+  --purple: #a78bfa;
+  --purple-light: #ede9fe;
+  --text-dark: #1e1b4b;
+  --text-mid: #6b7280;
+  --text-soft: #9ca3af;
+  --bg: #fff8fc;
+  --white: #ffffff;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --shadow-sm: 0 2px 12px rgba(236,72,153,0.08);
+  --shadow-md: 0 8px 32px rgba(236,72,153,0.12);
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text-dark);
+}
+
+/* Navbar Style Sync */
+.navbar { position: sticky; top: 0; z-index: 100; background: rgba(255,248,252,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(244,114,182,0.12); padding: 0 4%; }
+.nav-content { display: flex; align-items: center; justify-content: space-between; height: 85px; max-width: 1200px; margin: 0 auto; }
+.logo-wrapper { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo-dot { width: 10px; height: 10px; background: linear-gradient(135deg, var(--pink-mid), var(--purple)); border-radius: 50%; }
+.logo-container { display: inline-flex; align-items: center; font-family: 'Fredoka', sans-serif; font-size: 30px; font-weight: 700; letter-spacing: -0.3px; }
+.logo-c, .logo-a { color: #f472b6; } .logo-d { color: #a78bfa; } .logo-e, .logo-a2 { color: #ec4899; } .logo-u { color: #a78bfa; }
+.logo-box { border: 2px solid rgba(236,72,153,0.3); padding: 0px 8px; border-radius: 10px; margin-left: 6px; display: inline-flex; align-items: center; background: #fff; height: 38px; }
+.logo-case-text { color: var(--pink-mid); font-size: 24px; text-transform: uppercase; font-weight: 700; }
+.nav-links { display: flex; align-items: center; gap: 14px; }
+.nav-links a { text-decoration: none; font-size: 14px; color: var(--text-dark); font-weight: 600; }
+.nav-links a:hover, .nav-text-link.active { color: var(--pink-mid); }
+.nav-divider { color: rgba(244,114,182,0.18); font-weight: 300; }
+
+.tracking-layout-container {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 40px 4% 80px;
+}
+
+.back-navigation {
+  margin-bottom: 24px;
+}
+
+.back-navigation a {
+  color: var(--text-mid);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.back-navigation a:hover {
+  color: var(--pink-mid);
+}
+
+.status-tracking-card {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 40px 30px;
+  border: 1px solid rgba(244,114,182,0.12);
+  box-shadow: var(--shadow-md);
+}
+
+.card-head-title {
+  border-bottom: 1px solid rgba(244,114,182,0.1);
+  padding-bottom: 20px;
+  margin-bottom: 40px;
+}
+
+.card-head-title h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  color: var(--text-dark);
+}
+
+.card-head-title h3 span {
+  color: var(--pink-mid);
+}
+
+/* Sơ đồ Stepper Pastel độc quyền */
+.pastel-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+.node-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.node-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--purple-light);
+  color: var(--purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 12px;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 2px var(--purple-light);
+  transition: all 0.3s;
+}
+
+.node-text {
+  font-size: 13px;
+  color: var(--text-mid);
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.connector-line {
+  flex: 1;
+  height: 3px;
+  background-color: var(--purple-light);
+  margin-bottom: 28px;
+}
+
+/* Điểm nhấn bước hiện tại / Đã hoàn thành */
+.node-step.active .node-circle {
+  background: linear-gradient(135deg, var(--pink-mid), #c026d3);
+  color: #fff;
+  box-shadow: 0 0 0 2px var(--pink-mid);
+}
+
+.node-step.active .node-text {
+  color: var(--pink-mid);
+  font-weight: 700;
+}
+
+.node-step.completed .node-circle {
+  background-color: #34d399;
+  color: #fff;
+  box-shadow: 0 0 0 2px #34d399;
+}
+
+.connector-line.completed {
+  background-color: #34d399;
+}
+
+/* Trình theo dõi chi tiết */
+.history-timeline-section {
+  border-top: 1px solid rgba(244,114,182,0.08);
+  padding-top: 30px;
+}
+
+.history-timeline-section h4 {
+  margin-bottom: 24px;
+  color: var(--text-dark);
+}
+
+.history-timeline-section ul {
+  list-style: none;
+  position: relative;
+  padding-left: 24px;
+}
+
+.history-timeline-section ul::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background-color: var(--pink-light);
+}
+
+.history-timeline-section li {
+  position: relative;
+  margin-bottom: 24px;
+  font-size: 14px;
+  color: var(--text-mid);
+}
+
+.history-timeline-section li::before {
+  content: '';
+  position: absolute;
+  left: -22px;
+  top: 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--text-soft);
+}
+
+.history-timeline-section li.newest-node {
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+.history-timeline-section li.newest-node::before {
+  background-color: var(--pink-mid);
+  box-shadow: 0 0 0 3px var(--pink-light);
+}
+
+.timestamp {
+  font-weight: 700;
+  color: var(--purple);
+  margin-right: 12px;
+}
