@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Feedback - Cadeau Case</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700;800&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../shared/global.css">
+  <link rel="stylesheet" href="feedback.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="nav-content">
+      <a href="../home/index.html" class="logo-wrapper">
+        <div class="logo-dot"></div>
+        <div class="logo-container">
+          <span class="logo-c">C</span><span class="logo-a">a</span><span class="logo-d">d</span><span class="logo-e">e</span><span class="logo-a2">a</span><span class="logo-u">u</span>
+          <div class="logo-box"><span class="logo-case-text">Case</span></div>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <a href="../home/index.html" class="nav-text-link">Home</a>
+        <span class="nav-divider">|</span>
+        <a href="../customize/customize.html" class="nav-text-link">Customize</a>
+        <span class="nav-divider">|</span>
+        <a href="../my-orders/my-orders.html" class="nav-text-link active">My Orders</a>
+        <span class="nav-divider">|</span>
+        <a href="../tracking/tracking.html" class="nav-text-link">Tracking</a>
+        <span class="nav-divider">|</span>
+        <a href="feedback.html" class="nav-text-link">Feedback</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="feedback-layout-wrapper">
+    <div class="feedback-card-form">
+      <h2>Phản Hồi Đơn Hàng</h2>
+      <p>Cadeau Case tiếp nhận đánh giá trải nghiệm hoặc xử lý khiếu nại in ấn/sai dòng máy của bạn.</p>
+
+      <form id="cadeauFeedbackForm">
+        <div class="form-item-group">
+          <label>Mã đơn hàng liên quan:</label>
+          <input type="text" id="target-order-id" required readonly>
+        </div>
+
+        <div class="form-item-group">
+          <label>Phân loại mục đích gửi:</label>
+          <select id="feedback-category-select" required>
+            <option value="Review">Đánh giá chất lượng sản phẩm (Đóng góp ý kiến tích cực)</option>
+            <option value="Complaint_Design">Khiếu nại: Hình in bị lệch / Sai lệch màu sắc thiết kế</option>
+            <option value="Complaint_Model">Khiếu nại: Giao nhầm dòng máy điện thoại hoặc chất liệu ốp</option>
+            <option value="Complaint_Accessory">Khiếu nại: Thiếu phụ kiện đi kèm (Dây đeo/Gương/Sticker)</option>
+          </select>
+        </div>
+
+        <div class="form-item-group">
+          <label>Nội dung phản hồi chi tiết:</label>
+          <textarea id="feedback-text-content" rows="5" placeholder="Ghi nhận rõ ràng yêu cầu của bạn để bộ phận CSKH xử lý đổi mới hoặc hoàn tiền ngay..." required></textarea>
+        </div>
+
+        <div class="form-item-group">
+          <label>Hình ảnh minh chứng lỗi thực tế (nếu có):</label>
+          <input type="file" id="evidence-file" accept="image/*">
+        </div>
+
+        <button type="submit" class="btn-send-feedback">Gửi Yêu Cầu Đến Bộ Phận Hỗ Trợ</button>
+      </form>
+    </div>
+  </main>
+
+</body>
+</html>
