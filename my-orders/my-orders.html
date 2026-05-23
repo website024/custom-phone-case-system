@@ -3,27 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Orders - Cadeau CASE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Đơn Hàng Của Tôi - Custom Phone Case</title>
     <link rel="stylesheet" href="../shared/global.css">
     <link rel="stylesheet" href="../shared/responsive.css">
     <link rel="stylesheet" href="my-orders.css">
 </head>
 <body>
-    <header id="main-navbar"></header>
 
-    <main class="cadeau-container">
-        <div class="page-header-section">
-            <span class="badge-checkout">My Orders</span>
-            <h1 class="main-title">Your Order History</h1>
-            <p class="sub-title">Review your custom phone case designs and track your packages real-time.</p>
+    <header class="main-header">
+        <div class="container nav-container">
+            <div class="logo">
+                <a href="../home/index.html"><span>Custom</span>Case</a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../home/index.html">Home</a></li>
+                    <li><a href="../customize/customize.html">Customize</a></li>
+                    <li><a href="my-orders.html" class="active">My Orders</a></li>
+                    <li><a href="../tracking/tracking.html">Tracking</a></li>
+                    <li><a href="../feedback/feedback.html">Feedback</a></li>
+                    <li><a href="../cart/cart.html">Cart</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container my-orders-container">
+        <div class="page-header">
+            <h2>Lịch Sử Đơn Hàng Của Bạn</h2>
+            <p>Quản lý, theo dõi trạng thái vận chuyển và gửi phản hồi về sản phẩm.</p>
         </div>
 
-        <div id="orders-list" class="orders-list-wrapper">
+        <div class="order-filter">
+            <button class="filter-btn active" data-status="all">Tất cả</button>
+            <button class="filter-btn" data-status="Pending">Chờ xử lý</button>
+            <button class="filter-btn" data-status="Production">Đang sản xuất</button>
+            <button class="filter-btn" data-status="Shipping">Đang giao</button>
+            <button class="filter-btn" data-status="Delivered">Đã giao</button>
+        </div>
+
+        <div id="orders-list" class="orders-list">
             </div>
     </main>
 
-    <footer id="main-footer"></footer>
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2026 Custom Phone Case Information System. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script src="../shared/data.js"></script>
     <script src="../shared/common.js"></script>
