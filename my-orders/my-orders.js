@@ -1,45 +1,48 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Dữ liệu giả lập lấy từ data.js hoặc đơn hàng bạn đã đặt ở bước trước
-    const sampleOrders = [
+    // Dữ liệu mô phỏng lấy từ hệ thống đặt hàng của Cadeau Case
+    const mockOrders = [
         {
-            id: "ORD98234",
-            date: "22/05/2026",
-            productName: "Ốp iPhone 15 Pro Max - Thiết kế hình cá nhân [cite: 19, 21]",
-            image: "../images/products/phone-case-demo.jpg",
-            totalPrice: "185.000đ [cite: 24]",
-            statusCode: "production", // Khớp với bước Production của hệ thống [cite: 56]
-            statusText: "Đang sản xuất [cite: 56]"
+            id: "CAD-98234",
+            date: "23/05/2026",
+            phoneModel: "iPhone 15 Pro Max",
+            caseType: "Ốp Chống Sốc Trong Suốt (Custom Name)",
+            image: "../images/products/phone-case-demo.jpg", 
+            price: "185.000đ",
+            status: "production",
+            statusText: "Đang sản xuất"
         },
         {
-            id: "ORD97112",
-            date: "15/05/2026",
-            productName: "Ốp Samsung S25 Ultra - Ốp silicon chống sốc [cite: 20]",
+            id: "CAD-97112",
+            date: "18/05/2026",
+            phoneModel: "Samsung S25 Ultra",
+            caseType: "Ốp Nhám Mờ Pastel + Sticker",
             image: "../images/products/phone-case-demo2.jpg",
-            totalPrice: "210.000đ [cite: 24]",
-            statusCode: "delivered", // Trạng thái đã giao [cite: 58]
-            statusText: "Đã giao hàng [cite: 58]"
+            price: "210.000đ",
+            status: "delivered",
+            statusText: "Đã giao hàng"
         }
     ];
 
-    const ordersList = document.getElementById("orders-list");
+    const listContainer = document.getElementById("orders-list");
 
-    ordersList.innerHTML = sampleOrders.map(order => `
-        <div class="order-card">
-            <div class="order-header">
-                <span><strong>Mã đơn: #${order.id}</strong></span>
-                <span class="status-${order.statusCode}">${order.statusText}</span>
+    listContainer.innerHTML = mockOrders.map(order => `
+        <div class="order-cadeau-card">
+            <div class="card-top-bar">
+                <span class="order-code">Đơn hàng #${order.id}</span>
+                <span class="cadeau-status st-${order.status}">${order.statusText}</span>
             </div>
-            <div class="order-body">
-                <img src="${order.image}" class="order-img" onerror="this.src='https://via.placeholder.com/80x100?text=Ốp+Điện+Thoại'">
-                <div class="order-details">
-                    <h4>${order.productName}</h4>
-                    <p>Ngày đặt: ${order.date}</p>
-                    <p class="order-total">Tổng tiền: <span>${order.totalPrice}</span></p>
+            <div class="card-main-content">
+                <img src="${order.image}" class="product-preview-img" onerror="this.src='https://via.placeholder.com/90x120?text=Cadeau'">
+                <div class="product-info-details">
+                    <h3>${order.phoneModel}</h3>
+                    <p class="order-meta-text"><strong>Phân loại:</strong> ${order.caseType}</p>
+                    <p class="order-meta-text"><strong>Ngày đặt hàng:</strong> ${order.date}</p>
+                    <div class="price-tag-total">${order.price}</div>
                 </div>
             </div>
-            <div class="order-actions">
-                <button class="btn-track" onclick="window.location.href='../tracking/tracking.html?orderId=${order.id}'">Theo dõi [cite: 50]</button>
-                ${order.statusCode === 'delivered' ? `<button class="btn-feedback" onclick="window.location.href='../feedback/feedback.html?orderId=${order.id}'">Đánh giá/Khiếu nại [cite: 51]</button>` : ''}
+            <div class="card-action-group">
+                <button class="btn-cadeau-primary" onclick="window.location.href='../tracking/tracking.html?orderId=${order.id}'">Track Order</button>
+                ${order.status === 'delivered' ? `<button class="btn-cadeau-secondary" onclick="window.location.href='../feedback/feedback.html?orderId=${order.id}'">Feedback / Complaint</button>` : ''}
             </div>
         </div>
     `).join('');
