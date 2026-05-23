@@ -1,39 +1,175 @@
-.my-orders-container {
-    padding: 40px 20px;
-    max-width: 1000px;
-    margin: 0 auto;
-    min-height: 70vh;
+/* Thiết lập Font chữ và nền hệ thống bám sát ảnh chụp màn hình */
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #fff9fa; /* Nền trắng hồng cực nhẹ */
+    color: #1e1e4f; /* Màu chữ xanh tím than đậm như trong ảnh */
+    margin: 0;
+    padding: 0;
 }
-.orders-list {
-    margin-top: 25px;
+
+.cadeau-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+    min-height: 75vh;
+}
+
+/* Định dạng khu vực tiêu đề giống hệt ảnh mẫu */
+.page-header-section {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.badge-checkout {
+    background-color: #fce4ec;
+    color: #e91e63;
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: inline-block;
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+}
+
+.main-title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #1a1641;
+    margin: 0 0 12px 0;
+}
+
+.sub-title {
+    color: #6a6684;
+    font-size: 1.05rem;
+    margin: 0;
+}
+
+/* Khu vực hiển thị danh sách các khối đơn hàng */
+.orders-list-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 25px;
 }
-.order-card {
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    background-color: #ffffff;
-    padding: 20px;
+
+/* Khối Card bo tròn mềm mại và đổ bóng mờ mịn (Soft-shadow) giống ảnh */
+.order-cadeau-card {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: 0 10px 30px rgba(233, 30, 99, 0.04);
+    border: 1px solid rgba(233, 30, 99, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.order-header {
+
+.order-cadeau-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(233, 30, 99, 0.08);
+}
+
+.card-top-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #f0f0f0;
-    padding-bottom: 12px;
-    margin-bottom: 15px;
+    border-bottom: 1px dashed #fce4ec;
+    padding-bottom: 16px;
+    margin-bottom: 20px;
 }
-/* Màu sắc cho các trạng thái đơn hàng theo quy trình mới */
-.status-pending { background-color: #ffeeba; color: #856404; padding: 5px 10px; border-radius: 4px; }
-.status-production { background-color: #b8daff; color: #004085; padding: 5px 10px; border-radius: 4px; }
-.status-shipping { background-color: #c3e6cb; color: #155724; padding: 5px 10px; border-radius: 4px; }
-.status-delivered { background-color: #d4edda; color: #155724; padding: 5px 10px; border-radius: 4px; }
 
-.order-body { display: flex; gap: 15px; align-items: center; }
-.order-img { width: 80px; height: 100px; object-fit: cover; border-radius: 4px; }
-.order-details { flex: 1; }
-.order-total span { font-weight: bold; color: #ff4d4f; }
-.order-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 15px; }
-.btn-track { background-color: #007bff; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; }
-.btn-feedback { background-color: #fff; color: #333; border: 1px solid #ccc; padding: 8px 16px; border-radius: 4px; cursor: pointer; }
+.order-code {
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: #1a1641;
+}
+
+/* Nhãn trạng thái đơn hàng (Khớp 4 bước Giai đoạn 4) */
+.cadeau-status {
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.st-pending { background-color: #fff3cd; color: #856404; }
+.st-production { background-color: #e3f2fd; color: #0d47a1; }
+.st-shipping { background-color: #f3e5f5; color: #4a148c; }
+.st-delivered { background-color: #e8f5e9; color: #1b5e20; }
+
+.card-main-content {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+.product-preview-img {
+    width: 90px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 16px;
+    border: 2px solid #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    background-color: #fafafa;
+}
+
+.product-info-details {
+    flex: 1;
+}
+
+.product-info-details h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.25rem;
+    color: #1a1641;
+    font-weight: 700;
+}
+
+.order-meta-text {
+    font-size: 0.95rem;
+    color: #7c7899;
+    margin: 4px 0;
+}
+
+.price-tag-total {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #e91e63; /* Màu hồng đậm đặc trưng thương hiệu */
+    margin-top: 10px;
+}
+
+.card-action-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 20px;
+    border-top: 1px solid #fff0f3;
+    padding-top: 20px;
+}
+
+/* Nút bấm thiết kế chuẩn bo góc múp giống style nút của Cadeau Case */
+.btn-cadeau-primary {
+    background: linear-gradient(135deg, #ff6597 0%, #e91e63 100%);
+    color: #ffffff;
+    border: none;
+    padding: 10px 24px;
+    font-weight: 700;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: opacity 0.2s;
+}
+
+.btn-cadeau-secondary {
+    background-color: #ffffff;
+    color: #e91e63;
+    border: 1px solid #ffccd6;
+    padding: 10px 24px;
+    font-weight: 700;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.btn-cadeau-primary:hover { opacity: 0.9; }
+.btn-cadeau-secondary:hover { background-color: #fff0f3; }
