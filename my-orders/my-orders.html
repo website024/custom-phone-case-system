@@ -1,59 +1,89 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đơn Hàng Của Tôi - Custom Phone Case</title>
-    <link rel="stylesheet" href="../shared/global.css">
-    <link rel="stylesheet" href="../shared/responsive.css">
-    <link rel="stylesheet" href="my-orders.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Orders - Cadeau Case</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Playfair+Display:wght@700;800&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../shared/global.css">
+  <link rel="stylesheet" href="my-orders.css">
 </head>
 <body>
 
-    <header class="main-header">
-        <div class="container nav-container">
-            <div class="logo">
-                <a href="../home/index.html"><span>Custom</span>Case</a>
-            </div>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="../home/index.html">Home</a></li>
-                    <li><a href="../customize/customize.html">Customize</a></li>
-                    <li><a href="my-orders.html" class="active">My Orders</a></li>
-                    <li><a href="../tracking/tracking.html">Tracking</a></li>
-                    <li><a href="../feedback/feedback.html">Feedback</a></li>
-                    <li><a href="../cart/cart.html">Cart</a></li>
-                </ul>
-            </nav>
+  <header class="navbar">
+    <div class="nav-content">
+      <a href="../home/index.html" class="logo-wrapper">
+        <div class="logo-dot"></div>
+        <div class="logo-container">
+          <span class="logo-c">C</span>
+          <span class="logo-a">a</span>
+          <span class="logo-d">d</span>
+          <span class="logo-e">e</span>
+          <span class="logo-a2">a</span>
+          <span class="logo-u">u</span>
+          <div class="logo-box">
+            <span class="logo-case-text">Case</span>
+          </div>
         </div>
-    </header>
+      </a>
 
-    <main class="container my-orders-container">
-        <div class="page-header">
-            <h2>Lịch Sử Đơn Hàng Của Bạn</h2>
-            <p>Quản lý, theo dõi trạng thái vận chuyển và gửi phản hồi về sản phẩm.</p>
+      <nav class="nav-links">
+        <a href="../home/index.html" class="nav-text-link">Home</a>
+        <span class="nav-divider">|</span>
+        <a href="../customize/customize.html" class="nav-text-link">Customize</a>
+        <span class="nav-divider">|</span>
+        <a href="my-orders.html" class="nav-text-link active">My Orders</a>
+        <span class="nav-divider">|</span>
+        <a href="../tracking/tracking.html" class="nav-text-link">Tracking</a>
+        <span class="nav-divider">|</span>
+        <a href="../feedback/feedback.html" class="nav-text-link">Feedback</a>
+        <span class="nav-divider">|</span>
+
+        <div class="dropdown">
+          <span class="dropdown-trigger nav-icon-btn" title="Account">
+            <svg class="nav-icon" viewBox="0 0 24 24">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </span>
+          <div class="dropdown-menu">
+            <a href="../auth/login.html">Login</a>
+            <a href="#">Register</a>
+            <a href="#">Logout</a>
+          </div>
         </div>
 
-        <div class="order-filter">
-            <button class="filter-btn active" data-status="all">Tất cả</button>
-            <button class="filter-btn" data-status="Pending">Chờ xử lý</button>
-            <button class="filter-btn" data-status="Production">Đang sản xuất</button>
-            <button class="filter-btn" data-status="Shipping">Đang giao</button>
-            <button class="filter-btn" data-status="Delivered">Đã giao</button>
-        </div>
+        <a href="../cart/cart.html" class="nav-icon-btn nav-cart" title="Cart">
+          <svg class="nav-icon" viewBox="0 0 24 24">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="cart-badge" id="homeCartCount">0</span>
+        </a>
+      </nav>
+    </div>
+  </header>
 
-        <div id="orders-list" class="orders-list">
-            </div>
-    </main>
+  <main class="my-orders-container">
+    <div class="page-head">
+      <span>Đơn hàng của bạn</span>
+      <h2>Lịch Sử Đặt Hàng</h2>
+    </div>
 
-    <footer class="main-footer">
-        <div class="container">
-            <p>&copy; 2026 Custom Phone Case Information System. All rights reserved.</p>
-        </div>
-    </footer>
+    <div class="templates-filter">
+      <button class="filter-btn active" data-status="all">Tất cả đơn</button>
+      <button class="filter-btn" data-status="Pending">Chờ xử lý</button>
+      <button class="filter-btn" data-status="Production">Đang in ấn</button>
+      <button class="filter-btn" data-status="Shipping">Đang giao</button>
+      <button class="filter-btn" data-status="Delivered">Đã nhận hàng</button>
+    </div>
 
-    <script src="../shared/data.js"></script>
-    <script src="../shared/common.js"></script>
-    <script src="my-orders.js"></script>
+    <div id="orders-list" class="orders-list-wrapper"></div>
+  </main>
+
+  <script src="my-orders.js"></script>
 </body>
 </html>
