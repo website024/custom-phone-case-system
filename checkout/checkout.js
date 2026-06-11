@@ -10,7 +10,7 @@ const address = document.getElementById("address");
 const note = document.getElementById("note");
 
 function formatPrice(price) {
-  return price.toLocaleString("vi-VN") + "đ";
+  return Number(price).toLocaleString("vi-VN") + "đ";
 }
 
 function getCheckoutOrder() {
@@ -40,8 +40,8 @@ function renderCheckout() {
     div.innerHTML = `
       <h4>${item.deviceModel}</h4>
       <p>${item.caseType}</p>
-      <p>Quantity: ${item.quantity}</p>
-      <p>Price: ${formatPrice(item.price * item.quantity)}</p>
+      <p>Quantity: ${item.quantity || 1}</p>
+      <p>Price: ${formatPrice(Number(item.price || 0) * Number(item.quantity || 1))}</p>
     `;
 
     checkoutItems.appendChild(div);
@@ -67,42 +67,61 @@ checkoutForm.addEventListener("submit", function (event) {
   const customerAddress = address.value.trim();
   const customerNote = note.value.trim();
 
-  const paymentMethod = document.querySelector("input[name='payment']:checked").value;
+  const selectedPayment = document.querySelector(
+    "input[name='payment']:checked",
+  );
+
+  if (!selectedPayment) {
+    alert("Please select a payment method.");
+    return;
+  }
+
+  const paymentMethod = selectedPayment.value;
 
   if (!customerName || !customerPhone || !customerAddress) {
     alert("Please fill in full name, phone number, and delivery address.");
     return;
   }
 
-  const newOrder = {
-    id: "OD" + Date.now(),
-    date: new Date().toLocaleString("vi-VN"),
-    customer: {
-      name: customerName,
-      phone: customerPhone,
-      address: customerAddress,
-      note: customerNote
-    },
+  const orderData = {
+    userId: 1,
+    customerName: customerName,
+    customerPhone: customerPhone,
+    customerAddress: customerAddress,
+    customerNote: customerNote,
     paymentMethod: paymentMethod,
-    paymentStatus: paymentMethod === "COD" ? "Unpaid" : "Pending",
-    status: "Pending",
-    items: order.items,
     subtotal: order.subtotal,
     shippingFee: order.shippingFee,
-    total: order.total
+    totalAmount: order.total,
+    items: order.items,
   };
 
-  const orders = JSON.parse(localStorage.getItem("orders")) || [];
-  orders.push(newOrder);
+  fetch("http://localhost:5000/api/orders", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(orderData),
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      if (data.message === "Order created successfully") {
+        localStorage.removeItem("cart");
+        localStorage.removeItem("checkoutOrder");
 
-  localStorage.setItem("orders", JSON.stringify(orders));
+        alert("Order placed successfully! Order code: " + data.orderCode);
 
-  localStorage.removeItem("cart");
-  localStorage.removeItem("checkoutOrder");
-
-  alert("Order placed successfully!");
-
-  window.location.href = "../my-orders/my-orders.html";
+        window.location.href = "../my-orders/my-orders.html";
+      } else {
+        alert("Order failed: " + data.message);
+      }
+    })
+    .catch(function (error) {
+      console.error("Checkout error:", error);
+      alert("Cannot connect to server. Please try again.");
+    });
 });
 
 renderCheckout();

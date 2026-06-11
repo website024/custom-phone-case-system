@@ -1,33 +1,48 @@
-const orderLogData = {
-  "CAD-2026-9041": {
-    status: "Production",
-    logs: [
-      { time: "23/05/2026 09:30", message: "Bản thiết kế đã qua kiểm tra vùng in an toàn đạt chuẩn và chuyển xuống máy in chuyên dụng." },
-      { time: "23/05/2026 08:15", message: "Nhân viên kho xác nhận đủ phôi ốp và phụ kiện Gương Mini dán kèm." },
-      { time: "23/05/2026 07:00", message: "Hệ thống tự động ghi nhận đơn hàng thành công từ giỏ hàng." }
-    ]
-  },
-  "CAD-2026-8712": {
-    status: "Delivered",
-    logs: [
-      { time: "22/05/2026 15:00", message: "Đơn hàng đã được giao thành công tới tay khách hàng." },
-      { time: "20/05/2026 10:20", message: "Đơn vị vận chuyển lấy hàng và bắt đầu lộ trình giao hàng tốc hành." },
-      { time: "19/05/2026 16:15", message: "Bộ phận kiểm tra chất lượng (QC) hoàn tất đóng gói sản phẩm chống sốc." },
-      { time: "19/05/2026 11:00", message: "Đơn hàng hoàn tất in phun UV 3D bề mặt nổi." }
-    ]
-  }
-};
-
 document.addEventListener("DOMContentLoaded", () => {
   const queryParams = new URLSearchParams(window.location.search);
-  let orderId = queryParams.get('id') || "CAD-2026-9041";
+  const orderCode = queryParams.get("id");
 
-  document.getElementById("lbl-order-id").innerText = orderId;
+  if (!orderCode) {
+    document.getElementById("lbl-order-id").innerText = "No order code";
+    renderStepperNodes("Pending");
+    renderLogTimeline([
+      {
+        time: new Date(),
+        message: "No order code was provided.",
+      },
+    ]);
+    return;
+  }
 
-  const currentOrder = orderLogData[orderId] || orderLogData["CAD-2026-9041"];
-  renderStepperNodes(currentOrder.status);
-  renderLogTimeline(currentOrder.logs);
+  document.getElementById("lbl-order-id").innerText = orderCode;
+  loadTracking(orderCode);
 });
+
+async function loadTracking(orderCode) {
+  try {
+    const response = await fetch(
+      `http://localhost:5000/api/orders/tracking/${orderCode}`,
+    );
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || "Order not found");
+    }
+
+    renderStepperNodes(data.status);
+    renderLogTimeline(data.logs);
+  } catch (error) {
+    console.error("Load tracking error:", error);
+
+    renderStepperNodes("Pending");
+    renderLogTimeline([
+      {
+        time: new Date(),
+        message: "Unable to load tracking information from server.",
+      },
+    ]);
+  }
+}
 
 function renderStepperNodes(status) {
   const stepsOrder = ["Pending", "Production", "Shipping", "Delivered"];
@@ -37,9 +52,22 @@ function renderStepperNodes(status) {
     const element = document.getElementById(`node-${step}`);
     if (!element) return;
 
+    element.classList.remove("completed", "active");
+
+    if (
+      element.nextElementSibling &&
+      element.nextElementSibling.classList.contains("connector-line")
+    ) {
+      element.nextElementSibling.classList.remove("completed");
+    }
+
     if (index < targetIdx) {
       element.classList.add("completed");
-      if (element.nextElementSibling && element.nextElementSibling.classList.contains("connector-line")) {
+
+      if (
+        element.nextElementSibling &&
+        element.nextElementSibling.classList.contains("connector-line")
+      ) {
         element.nextElementSibling.classList.add("completed");
       }
     } else if (index === targetIdx) {
@@ -48,14 +76,36 @@ function renderStepperNodes(status) {
   });
 }
 
+function formatDateTime(dateString) {
+  return new Date(dateString).toLocaleString("en-US");
+}
+
 function renderLogTimeline(logs) {
   const loggerUl = document.getElementById("timeline-logger");
   loggerUl.innerHTML = "";
 
+  if (!logs || logs.length === 0) {
+    loggerUl.innerHTML = `
+      <li class="newest-node">
+        <span class="timestamp">${formatDateTime(new Date())}</span>
+        <span>No tracking logs available.</span>
+      </li>
+    `;
+    return;
+  }
+
   logs.forEach((log, index) => {
     const li = document.createElement("li");
-    if (index === 0) li.className = "newest-node";
-    li.innerHTML = `<span class="timestamp">${log.time}</span> <span>${log.message}</span>`;
+
+    if (index === 0) {
+      li.className = "newest-node";
+    }
+
+    li.innerHTML = `
+      <span class="timestamp">${formatDateTime(log.time)}</span>
+      <span>${log.message}</span>
+    `;
+
     loggerUl.appendChild(li);
   });
 }
