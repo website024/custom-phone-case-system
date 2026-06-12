@@ -13,8 +13,8 @@ async function loadOrders() {
     renderUserOrders("all");
   } catch (error) {
     console.error("Load orders error:", error);
-    const container = document.getElementById("orders-list");
-    container.innerHTML = `
+
+    document.getElementById("orders-list").innerHTML = `
       <div class="no-orders-msg">
         <p>Unable to load orders from server.</p>
       </div>
@@ -65,6 +65,24 @@ function getStatusInfo(status) {
   };
 }
 
+function renderOrderPreview(order) {
+  const preview = document.createElement("div");
+  preview.className = "case-preview-inner";
+
+  if (order.FrameImage) {
+    const frame = document.createElement("img");
+    frame.src = `../customize/images/${order.FrameImage}`;
+    frame.className = "preview-frame";
+    frame.alt = "Phone Case Preview";
+
+    preview.appendChild(frame);
+  } else {
+    preview.innerHTML = "📱";
+  }
+
+  return preview;
+}
+
 function renderUserOrders(filterStatus) {
   const container = document.getElementById("orders-list");
   container.innerHTML = "";
@@ -103,7 +121,7 @@ function renderUserOrders(filterStatus) {
       </div>
 
       <div class="order-card-body">
-        <div class="case-preview-box">📱</div>
+        <div class="case-preview-box"></div>
 
         <div class="order-details">
           <h4>Device: ${order.DeviceModel || "Unknown"}</h4>
@@ -128,6 +146,10 @@ function renderUserOrders(filterStatus) {
         </div>
       </div>
     `;
+
+    card
+      .querySelector(".case-preview-box")
+      .appendChild(renderOrderPreview(order));
 
     container.appendChild(card);
   });

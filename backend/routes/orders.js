@@ -26,18 +26,78 @@ router.get("/", async (req, res) => {
         o.ShippingFee,
         o.TotalAmount,
         o.CreatedAt,
+
         oi.OrderItemID,
         oi.DeviceModel,
         oi.CaseType,
         oi.FrameImage,
         oi.UnitPrice,
-        oi.Quantity
+        oi.Quantity,
+
+        d.DesignItemID,
+        d.ItemType,
+        d.Content,
+        d.PositionLeft,
+        d.PositionTop,
+        d.Width,
+        d.Height,
+        d.TextColor,
+        d.FontFamily,
+        d.FontSize
       FROM Orders o
       LEFT JOIN OrderItems oi ON o.OrderID = oi.OrderID
-      ORDER BY o.CreatedAt DESC
+      LEFT JOIN DesignItems d ON oi.OrderItemID = d.OrderItemID
+      ORDER BY o.CreatedAt DESC, oi.OrderItemID DESC, d.DesignItemID ASC
     `;
 
-    res.json(result.recordset);
+    const ordersMap = new Map();
+
+    result.recordset.forEach((row) => {
+      if (!ordersMap.has(row.OrderItemID)) {
+        ordersMap.set(row.OrderItemID, {
+          OrderID: row.OrderID,
+          OrderCode: row.OrderCode,
+          UserID: row.UserID,
+          CustomerName: row.CustomerName,
+          CustomerPhone: row.CustomerPhone,
+          CustomerAddress: row.CustomerAddress,
+          CustomerNote: row.CustomerNote,
+          PaymentMethod: row.PaymentMethod,
+          PaymentStatus: row.PaymentStatus,
+          OrderStatus: row.OrderStatus,
+          Subtotal: row.Subtotal,
+          ShippingFee: row.ShippingFee,
+          TotalAmount: row.TotalAmount,
+          CreatedAt: row.CreatedAt,
+
+          OrderItemID: row.OrderItemID,
+          DeviceModel: row.DeviceModel,
+          CaseType: row.CaseType,
+          FrameImage: row.FrameImage,
+          UnitPrice: row.UnitPrice,
+          Quantity: row.Quantity,
+
+          DesignItems: [],
+        });
+      }
+
+      if (row.DesignItemID) {
+        ordersMap.get(row.OrderItemID).DesignItems.push({
+          DesignItemID: row.DesignItemID,
+          type: row.ItemType,
+          content: row.Content,
+          left: row.PositionLeft,
+          top: row.PositionTop,
+          width: row.Width,
+          height: row.Height,
+          color: row.TextColor,
+          fontFamily: row.FontFamily,
+          fontSize: row.FontSize,
+        });
+      }
+    });
+
+    res.json(Array.from(ordersMap.values()));
   } catch (err) {
     res.status(500).json({
       message: "Get orders failed",
