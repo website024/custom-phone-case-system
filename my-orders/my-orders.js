@@ -32,37 +32,22 @@ function formatPrice(price) {
 
 function getStatusInfo(status) {
   if (status === "Pending") {
-    return {
-      text: "Pending Approval",
-      className: "status-pending",
-    };
+    return { text: "Pending Approval", className: "status-pending" };
   }
 
   if (status === "Production") {
-    return {
-      text: "In Production",
-      className: "status-production",
-    };
+    return { text: "In Production", className: "status-production" };
   }
 
   if (status === "Shipping") {
-    return {
-      text: "Shipping",
-      className: "status-shipping",
-    };
+    return { text: "Shipping", className: "status-shipping" };
   }
 
   if (status === "Delivered") {
-    return {
-      text: "Delivered",
-      className: "status-delivered",
-    };
+    return { text: "Delivered", className: "status-delivered" };
   }
 
-  return {
-    text: status || "Unknown",
-    className: "status-pending",
-  };
+  return { text: status || "Unknown", className: "status-pending" };
 }
 
 function renderOrderPreview(order) {
@@ -74,13 +59,32 @@ function renderOrderPreview(order) {
     frame.src = `../customize/images/${order.FrameImage}`;
     frame.className = "preview-frame";
     frame.alt = "Phone Case Preview";
-
     preview.appendChild(frame);
   } else {
     preview.innerHTML = "📱";
   }
 
   return preview;
+}
+
+function getDesignSummary(order) {
+  const designs = order.DesignItems || [];
+
+  const textItems = designs.filter((item) => item.type === "text");
+  const imageItems = designs.filter((item) => item.type === "image");
+  const stickerItems = designs.filter((item) => item.type === "sticker");
+
+  const customTexts = textItems
+    .map((item) => item.content)
+    .filter(Boolean)
+    .join(", ");
+
+  return {
+    total: designs.length,
+    text: customTexts || "None",
+    images: imageItems.length,
+    stickers: stickerItems.length,
+  };
 }
 
 function renderUserOrders(filterStatus) {
@@ -103,6 +107,7 @@ function renderUserOrders(filterStatus) {
 
   filtered.forEach((order) => {
     const statusInfo = getStatusInfo(order.OrderStatus);
+    const designSummary = getDesignSummary(order);
 
     const card = document.createElement("div");
     card.className = "order-card";
@@ -115,6 +120,7 @@ function renderUserOrders(filterStatus) {
             Order Date: ${formatDate(order.CreatedAt)}
           </span>
         </div>
+
         <span class="order-status-badge ${statusInfo.className}">
           ${statusInfo.text}
         </span>
@@ -126,6 +132,12 @@ function renderUserOrders(filterStatus) {
         <div class="order-details">
           <h4>Device: ${order.DeviceModel || "Unknown"}</h4>
           <p>Case Type: <strong>${order.CaseType || "Unknown"}</strong></p>
+          <p>Quantity: <strong>${order.Quantity || 1}</strong></p>
+          <p>Unit Price: <strong>${formatPrice(order.UnitPrice)}</strong></p>
+          <p>Custom Text: <strong>${designSummary.text}</strong></p>
+          <p>Uploaded Images: <strong>${designSummary.images}</strong></p>
+          <p>Stickers: <strong>${designSummary.stickers}</strong></p>
+          <p>Design Elements: <strong>${designSummary.total}</strong></p>
           <p>Customer: <span>${order.CustomerName || ""}</span></p>
         </div>
       </div>
